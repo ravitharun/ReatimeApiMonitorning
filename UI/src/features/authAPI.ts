@@ -5,6 +5,11 @@ type UserLogin = {
     email: string;
     password: string;
 };
+type UserLogins = {
+    name:string,
+    email: string;
+    password: string;
+};
 
 export const loginUser = async ({name, email, password }: UserLogin) => {
     console.log({ name,email, password });
