@@ -1,5 +1,4 @@
 import { RechartsDevtools } from '@recharts/devtools';
-import React from 'react'
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { theme } from '../Type/Theme';
 import type { props } from '../Type/Props';

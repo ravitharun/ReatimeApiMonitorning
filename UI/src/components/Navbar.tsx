@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { HiMenu, HiX } from "react-icons/hi";

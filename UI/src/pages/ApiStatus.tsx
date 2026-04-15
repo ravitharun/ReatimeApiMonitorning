@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { MdSpeed } from "react-icons/md";
 import { IoStatsChart } from "react-icons/io5";
@@ -54,3 +53,4 @@ function ApiStatus() {
 }
 
 export default ApiStatus;
+// https://recharts.github.io/en-US/examples/SimpleLineChart/

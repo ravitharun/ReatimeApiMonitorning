@@ -1,4 +1,3 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import Navbar from "./components/Navbar";
 import ApiStatus from "./pages/ApiStatus";
 import Graph from "./pages/Graph";

@@ -1,4 +1,3 @@
-import React from 'react'
 import Sucessapigraph from '../components/Sucessapigraph'
 import ErrorRateGraph from '../components/ErrorRateGraph'
 
