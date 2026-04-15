@@ -1,12 +1,17 @@
-import React from 'react'
-import Login from './pages/Login'
+import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import Navbar from "./components/Navbar";
+import ApiStatus from "./pages/ApiStatus";
+import Graph from "./pages/Graph";
 
-function App() {
-    return (
-        <>
-<Login></Login>
 
-        </>)
+
+export default function App() {
+        return (
+                <>
+                        <Navbar></Navbar>
+                        <ApiStatus></ApiStatus>
+                        <Graph></Graph>
+                    
+                </>
+        );
 }
-
-export default App
