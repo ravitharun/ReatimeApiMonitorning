@@ -35,10 +35,11 @@ This project is designed to solve that problem by providing a real-time monitori
 
 1. Frontend calls the API.
 2. Backend receives and processes the request.
-3. Middleware captures request details such as status code, response time, and endpoint.
+3. Middleware captures request details such as status code,method (GET/POST), response time, and endpoint.
 4. Server emits updates using **Socket.io**.
-5. Frontend receives real-time updates instantly and refreshes the UI.
-![alt text](image-1.png)
+ - Example: Server emits API logs (status, response time, endpoint) using Socket.io
+6. Frontend receives real-time updates instantly and refreshes the UI.
+![alt text](image.png)
 ## Project Structure
 
 ```bash
