@@ -3,13 +3,13 @@ import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
-    const [username, setUsername] = useState("");
+
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
 
     const handleLogin = () => {
-        console.log({ username, userEmail, userPassword });
-        console.log({ username, userEmail, userPassword });
+        console.log({ userEmail, userPassword });
+
     };
 
     return (
