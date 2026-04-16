@@ -9,6 +9,7 @@ const LoginForm = () => {
 
     const handleLogin = () => {
         console.log({ username, userEmail, userPassword });
+        console.log({ username, userEmail, userPassword });
     };
 
     return (
