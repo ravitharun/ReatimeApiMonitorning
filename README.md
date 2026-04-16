@@ -38,7 +38,7 @@ This project is designed to solve that problem by providing a real-time monitori
 3. Middleware captures request details such as status code, response time, and endpoint.
 4. Server emits updates using **Socket.io**.
 5. Frontend receives real-time updates instantly and refreshes the UI.
-
+![alt text](image-1.png)
 ## Project Structure
 
 ```bash
