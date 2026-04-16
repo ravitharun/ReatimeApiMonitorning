@@ -3,14 +3,12 @@ const { getIO } = require("../sockets/Scokets");
 const check = async (req, res) => {
     try {
         const io = getIO();
-        console.log("EMIT HAPPENED");
-        io.emit("check", "Hello LMS");
-
-
+        const { Apilogs } = req.body;
+        console.log(Apilogs, 'logs from port 3000.')
 
         return res.status(200).json({
             success: true,
-            message: "Event emitted successfully",
+            message: req.body
         });
 
     } catch (error) {

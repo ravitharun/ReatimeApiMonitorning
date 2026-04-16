@@ -1,7 +1,7 @@
 const express = require("express")
 const check = require("../controllers/check")
 const AppExp = express.Router()
-AppExp.get("/check",
+AppExp.post("/check",
     check
 )
 module.exports = AppExp

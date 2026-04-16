@@ -9,6 +9,7 @@ import socket from "./servies/Scokets";
 import axios from "axios";
 import Login from "./pages/Login";
 import Sign from "./pages/Sign";
+import Profile from "./pages/Profile";
 
 export default function App() {
 
@@ -47,12 +48,11 @@ export default function App() {
 
         <Navbar />
 
-      <Login></Login>
-      <Sign></Sign>
       <ApiStatus />
       <Graph />
       <ApiPerfomance />
       <RecentApilogs />
+      <Profile></Profile>
     </>
   );
 }

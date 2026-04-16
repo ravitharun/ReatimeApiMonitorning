@@ -62,7 +62,7 @@ const LoginForm = () => {
 
                     {/* Footer */}
                     <p className="text-center text-gray-400 text-sm">
-                        Don’t have an account? <Link to="/">
+                        Don’t have an account? <Link to="/SignUp">
                             <span className="text-blue-400 cursor-pointer">Sign up</span>
                         </Link>
                     </p>

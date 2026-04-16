@@ -112,7 +112,7 @@ function Sign() {
         {/* Footer */}
         <p className="text-center text-gray-400 text-sm">
           Already have an account?{" "}
-          <Link to="/">
+          <Link to="/login">
             <span className="text-blue-400 cursor-pointer">Sign in</span>
           </Link>
         </p>
