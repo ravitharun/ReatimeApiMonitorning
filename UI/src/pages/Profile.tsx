@@ -7,11 +7,6 @@ function Profile() {
             <div className='mt-32'>
 
                 User Profile
-                User Profile
-                User Profile
-                User Profile
-                User Profile
-                User Profile
             </div>
 
 
