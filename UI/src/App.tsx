@@ -7,6 +7,8 @@ import RecentApilogs from "./pages/RecentApilogs";
 
 import socket from "./servies/Scokets";
 import axios from "axios";
+import Login from "./pages/Login";
+import Sign from "./pages/Sign";
 
 export default function App() {
 
@@ -43,6 +45,8 @@ export default function App() {
   return (
     <>
       <Navbar />
+      <Login></Login>
+      <Sign></Sign>
       <ApiStatus />
       <Graph />
       <ApiPerfomance />
