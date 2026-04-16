@@ -1,13 +1,26 @@
 # RealTime API Monitoring System
 
 A simple real-time API monitoring dashboard built using **React, Node.js, Express, MongoDB, and Socket.io**.  
-It is designed to track **API performance, status, and errors in real time** and display live updates on the frontend.
+It tracks API performance, status, and errors in real time and displays live updates on the frontend.
 
 > [!NOTE]
-> This project is currently **still in the implementing stage**.  
-> At present, only the **UI part** has been completed.  
-> Backend integration, real-time API tracking, and advanced monitoring logic are under development.  
-> The **group collaboration feature** and **team-based smart notification system** will be implemented soon in upcoming updates.
+> This project is currently in the **implementation phase**.  
+> So far, only the **frontend UI** has been completed.  
+> Core backend functionality, real-time API monitoring, group collaboration features, and the **Team-Based Smart Notification System** are planned for upcoming versions.
+
+## Problem Statement
+
+In many applications, API failures, slow responses, and critical errors are not noticed immediately.  
+This project is designed to solve that problem by providing a real-time monitoring dashboard that can help teams track API health and respond faster to issues.
+
+## Features
+
+- Real-time API logging
+- Response time tracking
+- Error detection for **4xx / 5xx**
+- API performance monitoring
+- Live alerts using WebSockets
+- Dashboard visualization ready
 
 ## Tech Stack
 
@@ -18,26 +31,13 @@ It is designed to track **API performance, status, and errors in real time** and
 - **Socket.io** — Real-time communication
 - **Axios** — API requests
 
-## Features
+## Architecture / How It Works
 
-- Real-time API logging
-- Response time tracking
-- Error detection for **4xx / 5xx**
-- API performance monitoring
-- Live alerts using WebSockets
-- Dashboard visualization ready
-- Team-based smart alert architecture *(in progress)*
-
-## How It Works
-
-1. Frontend calls API
-2. Backend processes request
-3. Middleware tracks request data like:
-   - Status code
-   - Response time
-   - Endpoint
-4. Server emits event using **Socket.io**
-5. Frontend receives real-time updates instantly
+1. Frontend calls the API.
+2. Backend receives and processes the request.
+3. Middleware captures request details such as status code, response time, and endpoint.
+4. Server emits updates using **Socket.io**.
+5. Frontend receives real-time updates instantly and refreshes the UI.
 
 ## Project Structure
 
@@ -58,79 +58,7 @@ client/
 └── socket.js
 ```
 
-## Example API Flow
-
-```bash
-GET /AppExp/check
-   ↓
-Backend receives request
-   ↓
-Logs request data
-   ↓
-Socket emits "check" event
-   ↓
-Frontend receives and updates UI
-```
-
-## Real-Time Events
-
-- `check` → API test event
-- `api-log` → API monitoring data *(future use)*
-- `error-log` → Error tracking *(future use)*
-- `team-alert` → Team notification event *(planned)*
-
-## Team-Based Smart Notification System
-
-### Real-Time + Email Hybrid Alert System
-
-This project also aims to support a **team-based smart notification system** for monitoring API issues in collaborative environments.
-
-### Case 1: Multiple Users Online (Team Active)
-
-- You and your teammate are online
-- API issue occurs in the system
-- ✅ All online users receive real-time socket notifications
-- 📧 All team members also receive email alerts for critical issues
-
-### Case 2: Only One User Online (Partial Team Active)
-
-- Only one user is active in the web app
-- Other teammate is offline
-- ✅ Active user gets instant in-app notification through WebSocket
-- 📧 Offline teammate receives an email notification
-
-### Smart Notification Behavior
-
-- 🟢 Online users → Real-time alerts using **Socket.io**
-- 🔴 Offline users → Email fallback system
-- 🔔 Critical events → Both socket + email alerts
-
-### System Idea
-
-This notification system is designed to ensure that **no team member misses important API issues**, whether they are currently online or offline.
-
-## Purpose
-
-This project helps to:
-
-- Monitor API health in real time
-- Detect slow APIs greater than **500ms**
-- Track error rates
-- Build a production-level observability dashboard
-- Improve team awareness with smart alert delivery
-
-## Future Improvements
-
-- Live charts with **Recharts**
-- Authentication system
-- Role-based dashboard
-- Advanced logging system
-- Group collaboration feature
-- Team-based smart notification system
-- Email + socket hybrid alert engine
-- Online/offline user activity tracking
-
-## Getting Started
+## Setup Instructions
 
 ### Prerequisites
 
@@ -140,15 +68,13 @@ Make sure you have installed:
 - MongoDB
 - npm or yarn
 
-### Installation
-
-#### Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/ravitharun/ReatimeApiMonitorning
 ```
 
-#### Setup backend
+### Setup backend
 
 ```bash
 cd server
@@ -156,7 +82,7 @@ npm install
 npm start
 ```
 
-#### Setup frontend
+### Setup frontend
 
 ```bash
 cd UI
@@ -164,7 +90,7 @@ npm install
 npm start
 ```
 
-## Environment Variables
+### Environment Variables
 
 Create a `.env` file inside the `server` folder and add:
 
@@ -173,21 +99,17 @@ PORT=8000
 MONGO_URI=your_mongodb_connection_string
 ```
 
-## Use Cases
+## Future Improvements
 
-- Monitor internal APIs
-- Track API failures instantly
-- Analyze backend performance
-- Build real-time admin dashboards
-- Send alerts to active and inactive team members
-- Improve incident response in collaborative systems
+- Live charts with **Recharts**
+- Authentication system
+- Role-based dashboard
+- Advanced logging system
+- Group collaboration feature
+- Team-Based Smart Notification System
+- Email + socket hybrid alert engine
 
 ## Author
 
 **Built by Ravi Tharun 🚀**  
 Focused on building real-world full-stack monitoring systems.
-
-> [!NOTE]
-> This project is currently in the **implementation phase**.  
-> So far, only the **frontend UI** has been completed.  
-> Core backend functionality, real-time API monitoring, group collaboration features, and the **Team-Based Smart Notification System** are planned for upcoming versions.
