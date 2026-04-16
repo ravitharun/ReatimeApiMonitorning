@@ -8,6 +8,10 @@ function Profile() {
 
                 User Profile
                 User Profile
+                User Profile
+                User Profile
+                User Profile
+                User Profile
             </div>
 
 
