@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://reqres.in/api", // free test API
+  baseURL: "http://localhost:8000", // free test API
 });
 
 export default API;
