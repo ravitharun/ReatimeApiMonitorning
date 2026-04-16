@@ -1,12 +1,13 @@
 # RealTime API Monitoring System
 
 A simple real-time API monitoring dashboard built using **React, Node.js, Express, MongoDB, and Socket.io**.  
-It tracks **API performance, status, and errors in real time** and displays live updates on the frontend.
+It is designed to track **API performance, status, and errors in real time** and display live updates on the frontend.
 
 > [!NOTE]
-> Currently, only the **UI part** of this project is completed.  
-> Backend integration and real-time monitoring features are still under development.  
-> The **group collaboration feature** will be implemented soon in future updates.
+> This project is currently **still in the implementing stage**.  
+> At present, only the **UI part** has been completed.  
+> Backend integration, real-time API tracking, and advanced monitoring logic are under development.  
+> The **group collaboration feature** and **team-based smart notification system** will be implemented soon in upcoming updates.
 
 ## Tech Stack
 
@@ -25,6 +26,7 @@ It tracks **API performance, status, and errors in real time** and displays live
 - API performance monitoring
 - Live alerts using WebSockets
 - Dashboard visualization ready
+- Team-based smart alert architecture *(in progress)*
 
 ## How It Works
 
@@ -73,8 +75,39 @@ Frontend receives and updates UI
 ## Real-Time Events
 
 - `check` → API test event
-- `api-log` → API monitoring data (future use)
-- `error-log` → Error tracking (future use)
+- `api-log` → API monitoring data *(future use)*
+- `error-log` → Error tracking *(future use)*
+- `team-alert` → Team notification event *(planned)*
+
+## Team-Based Smart Notification System
+
+### Real-Time + Email Hybrid Alert System
+
+This project also aims to support a **team-based smart notification system** for monitoring API issues in collaborative environments.
+
+### Case 1: Multiple Users Online (Team Active)
+
+- You and your teammate are online
+- API issue occurs in the system
+- ✅ All online users receive real-time socket notifications
+- 📧 All team members also receive email alerts for critical issues
+
+### Case 2: Only One User Online (Partial Team Active)
+
+- Only one user is active in the web app
+- Other teammate is offline
+- ✅ Active user gets instant in-app notification through WebSocket
+- 📧 Offline teammate receives an email notification
+
+### Smart Notification Behavior
+
+- 🟢 Online users → Real-time alerts using **Socket.io**
+- 🔴 Offline users → Email fallback system
+- 🔔 Critical events → Both socket + email alerts
+
+### System Idea
+
+This notification system is designed to ensure that **no team member misses important API issues**, whether they are currently online or offline.
 
 ## Purpose
 
@@ -84,6 +117,7 @@ This project helps to:
 - Detect slow APIs greater than **500ms**
 - Track error rates
 - Build a production-level observability dashboard
+- Improve team awareness with smart alert delivery
 
 ## Future Improvements
 
@@ -92,6 +126,9 @@ This project helps to:
 - Role-based dashboard
 - Advanced logging system
 - Group collaboration feature
+- Team-based smart notification system
+- Email + socket hybrid alert engine
+- Online/offline user activity tracking
 
 ## Getting Started
 
@@ -142,14 +179,15 @@ MONGO_URI=your_mongodb_connection_string
 - Track API failures instantly
 - Analyze backend performance
 - Build real-time admin dashboards
+- Send alerts to active and inactive team members
+- Improve incident response in collaborative systems
 
 ## Author
 
 **Built by Ravi Tharun 🚀**  
 Focused on building real-world full-stack monitoring systems.
 
-
 > [!NOTE]
-> This project is currently in the **UI development phase**.  
-> Only the frontend interface has been completed so far.  
-> Backend functionality, real-time API tracking, and the **group collaboration feature** will be added in upcoming updates.
+> This project is currently in the **implementation phase**.  
+> So far, only the **frontend UI** has been completed.  
+> Core backend functionality, real-time API monitoring, group collaboration features, and the **Team-Based Smart Notification System** are planned for upcoming versions.
