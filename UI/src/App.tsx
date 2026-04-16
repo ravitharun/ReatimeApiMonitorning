@@ -44,7 +44,9 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
+
+        <Navbar />
+
       <Login></Login>
       <Sign></Sign>
       <ApiStatus />

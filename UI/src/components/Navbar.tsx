@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -9,7 +9,7 @@ function Navbar() {
     const [dark, setDark] = useState<boolean>(false);
 
     return (
-        <nav className="bg-white dark:bg-gray-900 shadow-md px-4 py-3">
+        <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md px-4 py-3 z-50">
             <div className="flex items-center justify-between">
 
                 {/* 🔹 Logo / Heading */}
