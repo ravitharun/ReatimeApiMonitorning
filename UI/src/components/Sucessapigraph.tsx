@@ -11,18 +11,16 @@ import {
 import { RechartsDevtools } from "@recharts/devtools";
 import { theme } from "../Type/Theme";
 import type { props } from "../Type/Props";
+import { Download } from "./Download";
 
 // Sample data
-const data = [
-    { name: "Page A", uv: 4000 },
-    { name: "Page B", uv: 3000 },
-    { name: "Page C", uv: 2000 },
-    { name: "Page D", uv: 2780 },
-    { name: "Page E", uv: 1890 },
-    { name: "Page F", uv: 2390 },
-    { name: "Page G", uv: 3490 },
+const responseTimeData = [
+ { time: "10:00", rps: 20 },
+  { time: "10:01", rps: 35 },
+  { time: "10:02", rps: 25 },
+  { time: "10:03", rps: 40 },
+  { time: "10:04", rps: 30 }
 ];
-
 
 export default function Example({ Geaphname, descprition }: props) {
     return (
@@ -47,11 +45,11 @@ export default function Example({ Geaphname, descprition }: props) {
                 <div className="w-full h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart
-                            data={data}
+                            data={responseTimeData}
                             margin={{ top: 10, right: 20, left: 0, bottom: 5 }}
                         >
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
+                            <XAxis dataKey="time" />
                             <YAxis />
 
                             <Tooltip />
@@ -59,13 +57,19 @@ export default function Example({ Geaphname, descprition }: props) {
 
                             <Line
                                 type="monotone"
-                                dataKey="uv"
+                                dataKey="rps"
                                 stroke="#10b981"
                                 strokeWidth={2}
                                 dot={{ r: 4 }}
                             />
                         </LineChart>
                     </ResponsiveContainer>
+                    <button
+                              onClick={() => Download(responseTimeData, "rps-data")}
+                              className="bg-green-600 text-white px-4 py-2 rounded"
+                            >
+                              Download RPS Excel
+                            </button>
                 </div>
 
                 {/* 🔹 Devtools */}

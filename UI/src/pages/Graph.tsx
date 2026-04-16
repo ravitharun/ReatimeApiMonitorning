@@ -1,5 +1,6 @@
 import Sucessapigraph from '../components/Sucessapigraph'
 import ErrorRateGraph from '../components/ErrorRateGraph'
+import ResponseTimeData from '../components/ResponseTimeData'
 
 function Graph() {
 
@@ -10,6 +11,7 @@ function Graph() {
 
             <ErrorRateGraph Geaphname="Error Rate" descprition="Real-time   API Error  Rate" />
         </div>
+            <ResponseTimeData></ResponseTimeData>
     </>)
 }
 
