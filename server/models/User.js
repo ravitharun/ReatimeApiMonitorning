@@ -8,6 +8,9 @@ const userModel = new mongooes.Schema({
     userEmail: {
         type: String, required: true, unique: true,
     },
+    isActive: {
+        type: Boolean, default: false
+    },
     userPassword: { type: String, required: true },
     userRole: { type: String, required: true },
     userProfile: { type: String, required: true },
