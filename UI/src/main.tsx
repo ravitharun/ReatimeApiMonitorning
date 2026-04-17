@@ -7,7 +7,7 @@ import LoginForm from "./pages/Login.tsx";
 import Profile from "./pages/Profile.tsx";
 import Maintenance from "./components/Maintenance.tsx";
 
-const isMaintenance = true; // change this when needed
+const isMaintenance = 0; // change this when needed
 
 createRoot(document.getElementById("root")!).render(
   isMaintenance ? (
