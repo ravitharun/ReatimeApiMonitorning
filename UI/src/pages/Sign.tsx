@@ -1,142 +1,162 @@
 import { useState } from "react";
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import Input from "../components/Input";
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthUsernewAccount } from "../servies/Auth";
-function Sign() {
-  const [username, setUsername] = useState<string>("");
-  const [userEmail, setUserEmail] = useState<string>("");
-  const [userPassword, setUserPassword] = useState<string>("");
-  const [userProfile, setUserProfile] = useState<any>(null);
-  const [UserProfileview, setUserProfileview] = useState<string | null>(null);
 
+function Sign() {
+  type userRole = "developer" | "teamLeader";
+
+  const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userEmpId, setuserEmpId] = useState("");
+  const [role, setUserole] = useState<userRole | "">("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userProfile, setUserProfile] = useState<any>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [loading, setloading] = useState<boolean>(false)
+  const navigate = useNavigate<string>("")
   const handleLogin = async () => {
-    if (!username || !userEmail || !userPassword || !userProfile) {
-      return toast.error("fill the required")
+    if (!username || !userEmpId || !userEmail || !userPassword || !userProfile || !role) {
+      return toast.error("Fill all fields");
     }
+
     const formData = new FormData();
     formData.append("username", username);
+    formData.append("userRole", role);
+    formData.append("userEmpId", userEmpId);
     formData.append("userEmail", userEmail);
     formData.append("userPassword", userPassword);
-    formData.append("userProfile", userProfile); // file
-
+    formData.append("userProfile", userProfile);
 
     try {
-      const response_newAccount = await AuthUsernewAccount(formData);
-      console.log(response_newAccount, 'response_newAccount');
-    } catch (error) {
-      console.log(error);
+      setloading(true)
+      const response: any = await AuthUsernewAccount(formData);
+      console.log(response.data.status, 'response');
+      if (response.data.status) {
+        setloading(false)
 
+        toast.success("Account created 🚀");
+        localStorage.setItem("token", response.data.token)
+        setTimeout(() => {
+          navigate("/login")
+        }, 2500);
+
+      }
+
+    } catch {
+      toast.error("Error creating account");
     }
-
   };
 
-  // Handle image upload
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: any) => {
     const file = e.target.files?.[0];
-    // /monitoring/AuthUser/NewAccount
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
       setUserProfile(file);
-      setUserProfileview(imageUrl);
+      setPreview(URL.createObjectURL(file));
     }
   };
 
   return (
     <>
-      <Toaster></Toaster>
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+      <Toaster />
 
-        <div className="w-full max-w-md p-8 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl space-y-5">
+      <div className="min-h-screen flex bg-black text-white">
 
-          {/* Header */}
-          <div className="text-center space-y-1">
-            <h2 className="text-3xl font-bold text-white">New Account</h2>
-            <p className="text-gray-300 text-sm">
-              Create a new account for monitoring APIs
-            </p>
-          </div>
-
-          {/* Profile Preview */}
-          <div className="flex justify-center">
-            {UserProfileview ? (
-              <img
-                src={UserProfileview}
-                alt="Profile"
-                className="w-20 h-20 rounded-full object-cover border-2 border-blue-500"
-              />
-            ) : (
-              <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-gray-400 text-xs">
-                No Image
-              </div>
-            )}
-          </div>
-
-          {/* File Upload */}
-          <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/20">
-            <FaUser className="text-gray-300" />
-            <Input
-              inputtype="file"
-              onChange={handleImageChange}
-              className="w-full bg-transparent text-white outline-none"
-              accept="image/*"
-            />
-          </div>
-
-          {/* Username */}
-          <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/20">
-            <FaUser className="text-gray-300" />
-            <Input
-              inputtype="text"
-              placeholder="Enter your name"
-              className="w-full bg-transparent text-white placeholder-gray-400 outline-none"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-
-          {/* Email */}
-          <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/20">
-            <FaEnvelope className="text-gray-300" />
-            <Input
-              inputtype="email"
-              placeholder="Email address"
-              onChange={(e) => setUserEmail(e.target.value)}
-              className="w-full bg-transparent text-white placeholder-gray-400 outline-none"
-            />
-          </div>
-
-          {/* Password */}
-          <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/20">
-            <FaLock className="text-gray-300" />
-            <Input
-              inputtype="password"
-              placeholder="Password"
-              onChange={(e) => setUserPassword(e.target.value)}
-              className="w-full bg-transparent text-white placeholder-gray-400 outline-none"
-            />
-          </div>
-
-          {/* Button */}
-          <button
-            onClick={handleLogin}
-            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-500 active:scale-[0.98] transition font-semibold text-white shadow-lg"
-          >
-            Sign Up
-          </button>
-
-          {/* Footer */}
-          <p className="text-center text-gray-400 text-sm">
-            Already have an account?{" "}
-            <Link to="/login">
-              <span className="text-blue-400 cursor-pointer">Sign in</span>
-            </Link>
+        {/* LEFT SIDE (Branding) */}
+        <div className="hidden md:flex w-1/2 flex-col justify-center px-16 bg-gradient-to-br from-blue-600/20 to-purple-600/20">
+          <h1 className="text-5xl font-bold mb-4">Welcome 🚀</h1>
+          <p className="text-gray-300 text-lg">
+            Build and monitor your APIs with a clean dashboard experience.
           </p>
+        </div>
 
+        {/* RIGHT SIDE (FORM) */}
+        <div className="flex w-full md:w-1/2 items-center justify-center px-6">
+
+          <div className="w-full max-w-md space-y-8">
+
+            {/* TITLE */}
+            <div>
+              <h2 className="text-3xl font-bold">Create Account</h2>
+              <p className="text-gray-400 text-sm">
+                Start your journey now
+              </p>
+            </div>
+
+            {/* PROFILE */}
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gray-800 overflow-hidden">
+                {preview && <img src={preview} className="w-full h-full object-cover" />}
+              </div>
+              <input type="file" onChange={handleImageChange} />
+            </div>
+
+            {/* ROLE SELECT (PILLS 🔥) */}
+            <div className="flex gap-3">
+              {["developer", "teamLeader"].map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setUserole(r as userRole)}
+                  className={`px-4 py-2 rounded-full border ${role === r
+                    ? "bg-blue-600 border-blue-600"
+                    : "border-gray-600 text-gray-400"
+                    }`}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+
+            {/* INPUTS */}
+            <div className="space-y-6">
+
+              <input
+                placeholder="Full Name"
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full bg-transparent border-b border-gray-600 py-2 focus:outline-none focus:border-blue-500"
+              />
+
+              <input
+                placeholder="Employee ID"
+                onChange={(e) => setuserEmpId(e.target.value)}
+                className="w-full bg-transparent border-b border-gray-600 py-2 focus:outline-none focus:border-blue-500"
+              />
+
+              <input
+                placeholder="Email"
+                onChange={(e) => setUserEmail(e.target.value)}
+                className="w-full bg-transparent border-b border-gray-600 py-2 focus:outline-none focus:border-blue-500"
+              />
+
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setUserPassword(e.target.value)}
+                className="w-full bg-transparent border-b border-gray-600 py-2 focus:outline-none focus:border-blue-500"
+              />
+
+            </div>
+
+            {/* BUTTON */}
+            <button
+              onClick={handleLogin}
+              className="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
+            >
+              {loading ? "creating" : "Create Account"}
+            </button>
+
+            {/* FOOTER */}
+            <p className="text-sm text-gray-400 text-center">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-400">
+                Login
+              </Link>
+            </p>
+
+          </div>
         </div>
       </div>
     </>
-
   );
 }
 
