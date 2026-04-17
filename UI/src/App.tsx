@@ -8,6 +8,8 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Profile from "./pages/Profile";
 import { socket } from "./servies/Scokets";
+import Sidebar from "./components/Sidebar";
+import AddMembers from "./pages/AddMembers";
 
 
 export default function App() {
@@ -42,15 +44,19 @@ export default function App() {
 
   return (
     <>
-     
-      <Toaster />
-      <Navbar />
+  <Toaster />
+
+  <Navbar />
+
+
+<AddMembers></AddMembers>
 
       <ApiStatus />
       <Graph />
       <ApiPerfomance />
       <RecentApilogs />
-      <Profile></Profile>
-    </>
+    
+  
+</>
   );
 }

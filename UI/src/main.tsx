@@ -1,12 +1,14 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import { BrowserRouter, Route,  Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Sign from './pages/Sign.tsx'
 import LoginForm from './pages/Login.tsx'
 import Profile from './pages/Profile.tsx'
+import Maintenance from './components/Maintenance.tsx'
 
 createRoot(document.getElementById('root')!).render(
+  <Maintenance>
 
     <BrowserRouter>
       <Routes>
@@ -20,5 +22,6 @@ createRoot(document.getElementById('root')!).render(
 
       </Routes>
     </BrowserRouter>
+  </Maintenance>
 
 )
