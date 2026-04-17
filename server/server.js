@@ -42,6 +42,9 @@ app.use(express.json());
 // =====================
 app.use("/AppExp", AppExp);
 app.use("/monitoring/AuthUser", Auth);
+app.get("/", (req, res) => {
+  return 'server is running.'
+})
 
 // =====================
 // Server start
