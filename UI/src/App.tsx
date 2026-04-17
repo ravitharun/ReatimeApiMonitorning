@@ -5,9 +5,9 @@ import ApiStatus from "./pages/ApiStatus";
 import Graph from "./pages/Graph";
 import RecentApilogs from "./pages/RecentApilogs";
 import toast, { Toaster } from "react-hot-toast";
-import socket from "./servies/Scokets";
 import axios from "axios";
 import Profile from "./pages/Profile";
+import { socket } from "./servies/Scokets";
 
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
   useEffect(() => {
 
     const handleCheck = (data: any) => {
-      console.log(`FAILURE in the Api ${data.originalUrl} metoh${data.method}`);
+      console.count(`FAILURE in the Api ${data.originalUrl} method ${data.method}`);
 
 
       if (data.status == 'SUCCESS') {
@@ -38,17 +38,7 @@ export default function App() {
     };
   }, []);
 
-  useEffect(() => {
-    const callAPI = async () => {
-      try {
-        await axios.get("http://localhost:8000/AppExp/check");
-      } catch (err) {
-        console.error(err);
-      }
-    };
 
-    callAPI();
-  }, []);
 
   return (
     <>

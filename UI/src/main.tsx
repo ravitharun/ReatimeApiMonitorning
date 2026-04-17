@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
@@ -8,7 +7,7 @@ import LoginForm from './pages/Login.tsx'
 import Profile from './pages/Profile.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
@@ -21,5 +20,5 @@ createRoot(document.getElementById('root')!).render(
 
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
+
 )
