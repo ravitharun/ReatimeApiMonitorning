@@ -1,3 +1,4 @@
+const ApiLogs = require("../models/Logs");
 const { getIO } = require("../sockets/Scokets");
 
 const check = async (req, res) => {
@@ -5,6 +6,8 @@ const check = async (req, res) => {
         const io = getIO();
         const { Apilogs } = req.body;
         console.log(Apilogs, 'logs from port 3000.')
+        const saveLogs = await  ApiLogs.create(Apilogs)
+        console.log(saveLogs, 'logs info Form DB');
 
         return res.status(200).json({
             success: true,

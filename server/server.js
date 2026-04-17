@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 
 const { initSocket } = require("./sockets/Scokets");
 const AppExp = require("./routes/checkRoute");
+const connectDB = require("./config/Db");
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const server = http.createServer(app);
 // Socket setup 
 // =====================
  initSocket(server);
+ connectDB()
 
 // =====================
 // Middlewares
