@@ -14,7 +14,7 @@ function Sign() {
   const [userProfile, setUserProfile] = useState<any>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setloading] = useState<boolean>(false)
-  const navigate = useNavigate<string>("")
+  const navigate = useNavigate()
   const handleLogin = async () => {
     if (!username || !userEmpId || !userEmail || !userPassword || !userProfile || !role) {
       return toast.error("Fill all fields");
@@ -141,7 +141,7 @@ function Sign() {
             <button
               onClick={handleLogin}
               className="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
-            >
+            > 
               {loading ? "creating" : "Create Account"}
             </button>
 

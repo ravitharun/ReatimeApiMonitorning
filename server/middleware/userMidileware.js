@@ -1,5 +1,6 @@
-export const userMidleware = async (req, res, next) => {
+const userMidleware = async (req, res, next) => {
     try {
+        console.log('hey ia am userMidleware');
 
         next()
     } catch (err) {
@@ -7,3 +8,5 @@ export const userMidleware = async (req, res, next) => {
 
     }
 }
+
+module.exports = userMidleware
