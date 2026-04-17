@@ -22,7 +22,8 @@ const server = http.createServer(app);
 // Middlewares
 // =====================
 app.use(cors({
-  origin: ["http://localhost:5173","http://localhost:3000",'http://localhost:8000']
+  origin: "http://localhost:5174",
+  credentials: true
 }));
 
 

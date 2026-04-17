@@ -1,17 +1,3 @@
-// {
-//   originalUrl: '/api/Profile/Get?userid=Teacher-6087',
-//   method: 'GET',
-//   statusCode: 304,
-//   responseTime: 8,
-//   responseTimeStatus: 'FAST',
-//   apihealth: 'REDIRECT',
-//   healthscore: 60,
-//   timestamp: 2026-04-17T01:46:01.866Z,
-//   status: 'SUCCESS'
-// }
-
-
-
 const mongoose = require("mongoose")
 const Logs = new mongoose.Schema({
     originalUrl: { type: String, required: true },
@@ -25,8 +11,7 @@ const Logs = new mongoose.Schema({
     status: { type: String, enum: ["SUCCESS", "FAILURE"], required: true },
 },{
     timestamps:true,
-    timeseries:true
 })
 
-const ApiLogs=new mongoose.model("APILOGS",Logs)
-module.exports=ApiLogs
+const ApiLogs = mongoose.model("ApiLog", Logs);
+module.exports={ApiLogs}
