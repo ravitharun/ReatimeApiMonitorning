@@ -1,4 +1,3 @@
-import React from "react";
 import { FiUser, FiMail, FiEye } from "react-icons/fi";
 
 function AddmemberList() {

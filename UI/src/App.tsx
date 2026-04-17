@@ -5,10 +5,9 @@ import ApiStatus from "./pages/ApiStatus";
 import Graph from "./pages/Graph";
 import RecentApilogs from "./pages/RecentApilogs";
 import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
-import Profile from "./pages/Profile";
+
 import { socket } from "./servies/Scokets";
-import Sidebar from "./components/Sidebar";
+
 import AddMembers from "./pages/AddMembers";
 
 
@@ -21,7 +20,7 @@ export default function App() {
 
 
       if (data.status == 'SUCCESS') {
-        toast.custom((t) => (
+        toast.custom(() => (
           <div className="bg-red-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2">
             <span>🚨 API Failure</span>
             <span className="text-sm opacity-80">

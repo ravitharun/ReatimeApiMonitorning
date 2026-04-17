@@ -1,4 +1,3 @@
-import React from "react";
 import { FiTool, FiClock, FiAlertTriangle } from "react-icons/fi";
 
 function Maintenance() {

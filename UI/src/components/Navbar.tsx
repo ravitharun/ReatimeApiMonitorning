@@ -10,7 +10,6 @@ import {
   FiDatabase,
   FiSettings,
   FiBarChart2,
-  FiUser,
 } from "react-icons/fi";
 import Sidebar from "./Sidebar";
 
