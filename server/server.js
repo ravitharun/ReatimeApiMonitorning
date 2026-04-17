@@ -29,6 +29,12 @@ app.use(cors({
   credentials: true
 }));
 
+// console.log({process.env.NODE_ENV,process.env.JWT_SECRET_KEY});
+// const data=
+console.log(process.env.NODE_ENV, 'NODE_ENV');
+console.log(process.env.Resend_email, 'Resend_email');
+console.log(process.env.CLOUDINARY_URL, 'CLOUDINARY_URL');
+console.log(process.env.JWT_SECRET_KEY, 'JWT_SECRET_KEY');
 
 app.use(express.json());
 // =====================
