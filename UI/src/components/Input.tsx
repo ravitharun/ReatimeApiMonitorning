@@ -2,16 +2,18 @@ import React from "react"
 
 type Inputprops = {
     inputtype: string,
-    placeholder: string,
-    required: boolean,
+    placeholder?: string | '',
+    required?: boolean,
+    className: string,
+    accept?: string | '',
     onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
         void
 
 }
-function Input({ inputtype, placeholder, onChange }: Inputprops) {
+function Input({ inputtype, placeholder, className, accept, onChange }: Inputprops) {
     return (
         <>
-            <input type={inputtype} placeholder={placeholder} required onChange={onChange} />
+            <input type={inputtype} accept={accept} placeholder={placeholder} required onChange={onChange} className={className} />
 
 
         </>

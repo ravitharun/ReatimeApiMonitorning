@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Input from "../components/Input";
 
 const LoginForm = () => {
 
@@ -31,8 +32,8 @@ const LoginForm = () => {
                     {/* Email */}
                     <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus-within:border-blue-400 transition">
                         <FaEnvelope className="text-gray-300" />
-                        <input
-                            type="email"
+                        <Input
+                            inputtype="email"
                             placeholder="Email address"
                             required
                             onChange={(e) => setUserEmail(e.target.value)}
@@ -43,8 +44,9 @@ const LoginForm = () => {
                     {/* Password */}
                     <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus-within:border-blue-400 transition">
                         <FaLock className="text-gray-300" />
-                        <input
-                            type="password"
+                        <Input
+                        // inputtype=""
+                            inputtype="password"
                             placeholder="Password"
                             required
                             onChange={(e) => setUserPassword(e.target.value)}

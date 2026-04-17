@@ -15,3 +15,9 @@
 # Day 3 (low)
 # check any feat  to be implemted or pending Feature
 <!-- #Download logs (CSV) -->
+
+
+
+<!-- GIT -->
+<!-- <!-- git rm -r --cached node_modules -->
+<!-- git rm --cached .env --> 
