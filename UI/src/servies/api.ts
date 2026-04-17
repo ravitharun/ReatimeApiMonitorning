@@ -1,7 +1,9 @@
 import axios from "axios";
+import { API_URL } from "./apivesrion";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/", // free test API
+  baseURL: API_URL // free test API
 });
+console.log(API_URL);
 
 export default API;
