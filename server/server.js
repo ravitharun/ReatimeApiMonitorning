@@ -24,8 +24,11 @@ connectDB()
 // =====================
 // Middlewares
 // =====================
+const apiurl = process.env.NODE_ENV == 'Development' ? ["http://localhost:5174", "http://localhost:5173"] : process.env.LiveUi_Api
+console.log(apiurl,'apiurl');
+
 app.use(cors({
-  origin: ["http://localhost:5174", "http://localhost:5173"],
+  origin: apiurl,
   credentials: true
 }));
 
