@@ -37,4 +37,41 @@ const AuthNewUser = async (req, res) => {
 
     }
 }
-module.exports = AuthNewUser
+const LoginUser = async (req, res) => {
+    try {
+
+
+        const { userEmail, userPassword, role } = req.query;
+        console.log({ userEmail, userPassword, role });
+        if (!userEmail || !userPassword || !role) { return res.status(404).json({ message: "Inputs are missing." }) }
+        const getuser = await user.findOne({ userEmail: userEmail })
+        if (getuser == null) {
+            console.log({ message: "User not found with these email." });
+
+            return res.status(403).json({ message: "User not found." })
+        }
+        const hashpasswordcompare = await bcrypt.compare(userPassword, getuser.userPassword)
+
+
+        if (!hashpasswordcompare) {
+            console.log({ status: true, message: "Password is incorrect" });
+            
+            return res.status(400).json({ status: true, message: "Password is incorrect" })
+        }
+        if (getuser.userRole != role) {
+            console.log({ status: true, message: "role is incorrect" });
+            return res.status(400).json({ status: true, message: "role  is incorrect" })
+
+        }
+
+
+
+         res.status(200).json({ status: true, message: "ok" })
+    } catch (error) {
+        console.log(error.message);
+
+        return res.status(500).json({ message: error })
+
+    }
+}
+module.exports = { AuthNewUser, LoginUser }

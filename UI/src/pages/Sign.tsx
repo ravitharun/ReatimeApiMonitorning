@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthUsernewAccount } from "../servies/Auth";
+import type { userRole } from "../Type/Login";
 
 function Sign() {
-  type userRole = "developer" | "teamLeader";
 
   const [username, setUsername] = useState("");
   const [userEmail, setUserEmail] = useState("");

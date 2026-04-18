@@ -1,3 +1,4 @@
+import type { userlogin } from "../Type/Login";
 import API from "./api";
 
 export const AuthUsernewAccount = async (data: FormData) => {
@@ -9,5 +10,25 @@ export const AuthUsernewAccount = async (data: FormData) => {
     return response;
   } catch (error) {
     return error;
+  }
+};
+export const AuthLoginUser = async (userinfo: userlogin) => {
+  try {
+    console.log(userinfo, 'userinfo Api calll');
+
+    const response = await API.get(
+      "/monitoring/AuthUser/Login", {
+      params: {
+        userEmail: userinfo.userEmail,
+        userPassword: userinfo.userPassword,
+        role: userinfo.role
+      }
+    }
+    );
+    return response;
+  } catch (error:any) {
+    console.log(error);
+    
+    return error.message;
   }
 };
