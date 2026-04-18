@@ -16,12 +16,18 @@ const LoginForm = () => {
         // console.log();
         const userinfo = { userEmail, userPassword, role }
 
+        localStorage.removeItem("token")
+        localStorage.removeItem("userInfo")
+        if (!userEmail || !userPassword || !role) {
+            return toast.error("Fill the required Feilds")
+        }
+
         try {
             const response = await AuthLoginUser(userinfo)
             console.log('login response', response);
             if (response.data.message == 'ok') {
-                localStorage.setItem("token",response.data.token)
-                localStorage.setItem("userInfo",JSON.stringify(response.data.user))
+                localStorage.setItem("token", response.data.token)
+                localStorage.setItem("userInfo", JSON.stringify(response.data.user))
                 toast.success("Logined")
                 return setTimeout(() => {
                     window.location.href = '/'

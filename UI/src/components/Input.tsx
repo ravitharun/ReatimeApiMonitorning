@@ -4,6 +4,7 @@ type Inputprops = {
     inputtype: string,
     placeholder?: string | '',
     required?: boolean,
+    Inputvalue?: any
     className: string,
     accept?: string | '',
     onChange: (e: React.ChangeEvent<HTMLInputElement>) =>

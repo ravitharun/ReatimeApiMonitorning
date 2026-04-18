@@ -16,9 +16,10 @@ type MenuItem = {
 type Props = {
     isOpen: boolean;
     menu: MenuItem[];
+    page: string
 };
 
-function Sidebar({ isOpen, menu }: Props) {
+function Sidebar({ isOpen, menu, page }: Props) {
     return (
         <div
             className={`fixed top-0 left-0 h-full w-72 bg-[#0f172a] text-white p-5 pt-20 border-r border-gray-800
@@ -40,7 +41,7 @@ function Sidebar({ isOpen, menu }: Props) {
 
                             <div
                                 key={index}
-                                className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#1e293b] cursor-pointer transition"
+                                className={`flex items-center gap-3 p-3 rounded-lg hover:bg-[#1e293b] cursor-pointer transition  ${page == item.name ? 'bg-[#1e290b]' : ''}`}
                             >
                                 <div className="text-lg">{item.icon}</div>
 
@@ -60,7 +61,7 @@ function Sidebar({ isOpen, menu }: Props) {
 
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#1e293b] cursor-pointer transition"
                 >
-                    <div className="text-lg">{!token ? <IoMdLogIn  className="text-green-500"/> : <IoMdLogOut className="text-red-300"/>}</div>
+                    <div className="text-lg">{!token ? <IoMdLogIn className="text-green-500" /> : <IoMdLogOut className="text-red-300" />}</div>
 
                     <div onClick={handelLogout}>
                         <h3 className="text-sm font-medium">{!token ? "login" : "Logout"}</h3>

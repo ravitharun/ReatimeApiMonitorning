@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -11,23 +11,82 @@ import {
   FiBarChart2,
 } from "react-icons/fi";
 import Sidebar from "./Sidebar";
+import { socket } from "../servies/Scokets";
+import toast, { Toaster } from "react-hot-toast";
+import { userinfo } from "../servies/apivesrion";
+type currentpage = {
+  page?: any
+}
+function Navbar({ page }: currentpage) {
 
-function Navbar() {
+
+  // Realtime Notification
+  useEffect(() => {
+
+    const handleCheck = (data: any) => {
+      console.count(`FAILURE in the Api ${data.originalUrl} method ${data.method}`);
+
+
+      if (data.status == 'SUCCESS') {
+        toast.custom(() => (
+          <div className="bg-red-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2">
+            <span>🚨 API Failure</span>
+            <span className="text-sm opacity-80">
+              {data.method} {data.originalUrl}
+            </span>
+          </div>
+        ));
+
+      }
+    };
+
+
+    const handleCheckuser = (data: any) => {
+      const text: boolean = data.split("-")[1].split(" ")[0] == JSON.parse(userinfo).userEmpId
+      if (text) {
+        return toast.success("You are in online")
+      }
+      toast.success(data)
+    }
+    const handleCheckuserDeactivation = (data: any) => {
+      const text: boolean = data.split("-")[1].split(" ")[0] == JSON.parse(userinfo).userEmpId
+      if (text) {
+        return toast.error("You are in Offline")
+      }
+      toast.error(data)
+    }
+    socket.on("CheckLogsNotif", handleCheck);
+    socket.on("UserActiveNotification", handleCheckuser);
+    socket.on("UserDeactiveNotification", handleCheckuserDeactivation);
+    return () => {
+      socket.off("CheckLogsNotif", handleCheck);
+      socket.off("UserDeactiveNotification", handleCheckuserDeactivation);
+      socket.off("UserActiveNotification", handleCheckuser);
+      socket.off("disconnect", handleCheckuserDeactivation);
+
+    };
+  }, []);
+
+
+
+
+
   const [isOpen, setIsOpen] = useState(true);
   const [dark, setDark] = useState(false);
 
   const menu = [
-    { name: "Team Member Management", icon: <FiUserPlus />,url:"/TeamMembersManagemenet" },
-    { name: "Team Members", icon: <FiUsers />,url:"/TeamMembers" },
-    { name: "API Monitoring", icon: <FiActivity />,url:"/" },
-    { name: "Analytics", icon: <FiBarChart2 /> ,url:"/Analytics"},
-    { name: "Logs", icon: <FiDatabase /> ,url:"/Logs"},
+    { name: "API Monitoring", icon: <FiActivity />, url: "/" },
+    { name: "Team Members", icon: <FiUsers />, url: "/TeamMembers" },
+    { name: "Team Member Management", icon: <FiUserPlus />, url: "/TeamMembersManagemenet" },
+    { name: "Analytics", icon: <FiBarChart2 />, url: "/Analytics" },
+    { name: "Logs", icon: <FiDatabase />, url: "/Logs" },
     // { name: "Settings", icon: <FiSettings />,url:"/" },
-    
+
   ];
 
   return (
     <>
+      <Toaster></Toaster>
       {/* NAVBAR */}
       <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md px-4 py-3 z-50">
         <div className="flex items-center justify-between">
@@ -53,22 +112,22 @@ function Navbar() {
           <div className="flex items-center gap-4">
             <button onClick={() => setDark(!dark)}>
               {dark ? (
-                <MdLightMode className="text-xl" />
+                <MdLightMode className="text-xl text-white" />
               ) : (
-                <MdDarkMode className="text-xl" />
+                <MdDarkMode className="text-xl text-white" />
               )}
             </button>
 
             <Link to="/profile">
-              <FaUserCircle className="text-2xl cursor-pointer" />
+              <FaUserCircle className="text-2xl cursor-pointer text-white " />
             </Link>
           </div>
         </div>
       </nav>
 
       {/* SIDEBAR DRAWER */}
-      <Sidebar isOpen={isOpen} menu={menu}></Sidebar>
-  
+      <Sidebar isOpen={isOpen} menu={menu} page={page}></Sidebar>
+
 
       {isOpen && (
         <div
