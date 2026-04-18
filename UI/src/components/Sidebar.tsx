@@ -1,5 +1,4 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
 import { APP_INFO } from "../constants/appInfo";
 import { token } from "../user";
 import { Link } from "react-router-dom";

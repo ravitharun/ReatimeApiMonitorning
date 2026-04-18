@@ -53,7 +53,6 @@ export default function App() {
     socket.on("CheckLogsNotif", handleCheck);
     socket.on("UserActiveNotification", handleCheckuser);
     socket.on("UserDeactiveNotification", handleCheckuserDeactivation);
-
     return () => {
       socket.off("CheckLogsNotif", handleCheck);
       socket.off("UserDeactiveNotification", handleCheckuserDeactivation);

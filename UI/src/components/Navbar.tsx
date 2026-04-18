@@ -8,7 +8,6 @@ import {
   FiUsers,
   FiActivity,
   FiDatabase,
-  FiSettings,
   FiBarChart2,
 } from "react-icons/fi";
 import Sidebar from "./Sidebar";
