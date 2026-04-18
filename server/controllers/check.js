@@ -5,7 +5,7 @@ const check = async (req, res) => {
     try {
         const io = getIO();
         const realtimeApilogs = req.body;
-        console.log(req.body);
+        console.log(req.body,'api LOgs monitoring.');
     
         if (!realtimeApilogs) {
             return res.status(400).json({
@@ -15,7 +15,7 @@ const check = async (req, res) => {
         }
         const saveLogs = await ApiLogs.create(realtimeApilogs);
         if (realtimeApilogs.status === "SUCCESS") {
-            return io.emit("CheckLogsNotif", saveLogs); // better send saved data
+            return io.emit("CheckLogsNotif", saveLogs); 
         }
 
         return res.status(200).json({
@@ -23,7 +23,7 @@ const check = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error:", error.message);
 
         return res.status(500).json({
             success: false,
