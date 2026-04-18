@@ -14,6 +14,7 @@ const userModel = new mongooes.Schema({
     userPassword: { type: String, required: true },
     userRole: { type: String, required: true },
     userProfile: { type: String, required: true },
+    lastSeen: { type: String, default: new Date() }
 }, { timestamps: true })
 
 

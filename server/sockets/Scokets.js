@@ -1,3 +1,5 @@
+
+const User = require("../models/User")
 let io;
 
 const initSocket = (server) => {
@@ -5,16 +7,22 @@ const initSocket = (server) => {
 
     io = new Server(server, {
         cors: {
-            origin: ["http://localhost:5174","http://localhost:5173"],
+            origin: ["http://localhost:5174", "http://localhost:5173"],
             methods: ["GET", "POST"],
         },
     });
 
-    io.on("connection", (socket) => {
+    io.on("connection", async (socket) => {
         console.log("⚡ User connected:", socket.id);
-        
-        socket.on("disconnect", () => {
+        const userid = socket.handshake.query.userId
+        const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: true }, { new: true })
+
+        io.emit("UserActiveNotification", `hey ${userUpdateActive.username} is in online`)
+        socket.on("disconnect", async () => {
             console.log("❌ User disconnected:", socket.id);
+        
+            const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: false,lastSeen:new Date() }, { new: true })
+            io.emit("UserDeactiveNotification", `hey ${userUpdateActive.username} went offline.`)
         });
     });
 

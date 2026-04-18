@@ -1,11 +1,17 @@
 import React from "react";
 import { FaUser } from "react-icons/fa";
 import { APP_INFO } from "../constants/appInfo";
+import { token } from "../user";
+import { Link } from "react-router-dom";
+import { IoMdLogIn } from "react-icons/io";
+import { IoMdLogOut } from "react-icons/io";
+import { handelLogout } from "../features/Logout";
 
 type MenuItem = {
     name: string;
     icon: React.ReactNode;
     desc?: string;
+    url: string
 };
 
 type Props = {
@@ -29,29 +35,36 @@ function Sidebar({ isOpen, menu }: Props) {
             {/* Menu */}
             <div className="space-y-2">
                 {menu.map((item, index) => (
-                    <div
-                        key={index}
-                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#1e293b] cursor-pointer transition"
-                    >
-                        <div className="text-lg">{item.icon}</div>
+                    <>
+                        <Link to={item.url}>
 
-                        <div>
-                            <h3 className="text-sm font-medium">{item.name}</h3>
-                            {item.desc && (
-                                <p className="text-xs text-gray-400">{item.desc}</p>
-                            )}
-                        </div>
-                    </div>
+
+                            <div
+                                key={index}
+                                className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#1e293b] cursor-pointer transition"
+                            >
+                                <div className="text-lg">{item.icon}</div>
+
+                                <div>
+                                    <h3 className="text-sm font-medium">{item.name}</h3>
+                                    {item.desc && (
+                                        <p className="text-xs text-gray-400">{item.desc}</p>
+                                    )}
+                                </div>
+                            </div>
+                        </Link>
+                    </>
+
                 ))}
                 {/* login */}
                 <div
 
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#1e293b] cursor-pointer transition"
                 >
-                    <div className="text-lg"><FaUser /></div>
+                    <div className="text-lg">{!token ? <IoMdLogIn  className="text-green-500"/> : <IoMdLogOut className="text-red-300"/>}</div>
 
-                    <div>
-                        <h3 className="text-sm font-medium">login</h3>
+                    <div onClick={handelLogout}>
+                        <h3 className="text-sm font-medium">{!token ? "login" : "Logout"}</h3>
 
                     </div>
                 </div>
@@ -60,7 +73,7 @@ function Sidebar({ isOpen, menu }: Props) {
 
             {/* Footer */}
             <div className="absolute bottom-4 text-xs text-gray-500">
-              {APP_INFO.version}-{APP_INFO.name}
+                {APP_INFO.version}-{APP_INFO.name}
             </div>
         </div>
     );

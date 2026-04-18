@@ -7,11 +7,12 @@ import RecentApilogs from "./pages/RecentApilogs";
 import toast, { Toaster } from "react-hot-toast";
 
 import { socket } from "./servies/Scokets";
+import { userinfo } from "./servies/apivesrion";
 
-import AddMembers from "./pages/AddMembers";
 
 
 export default function App() {
+  // console.log(JSON.parse(userinfo).userEmpId,'userinfo');
 
   useEffect(() => {
 
@@ -31,10 +32,33 @@ export default function App() {
 
       }
     };
+
+
+    const handleCheckuser = (data: any) => {
+      const text: boolean = data.split(" ")[1] == JSON.parse(userinfo).username
+      console.log(text, 'text');
+      if (text) {
+        return toast.success("your are in online")
+      }
+      toast.success(data)
+    }
+    const handleCheckuserDeactivation = (data: any) => {
+      const text: boolean = data.split(" ")[1] == JSON.parse(userinfo).username
+      console.log(text, 'text');
+      if (text) {
+        return toast.error("your are in Offline")
+      }
+      toast.error(data)
+    }
     socket.on("CheckLogsNotif", handleCheck);
+    socket.on("UserActiveNotification", handleCheckuser);
+    socket.on("UserDeactiveNotification", handleCheckuserDeactivation);
 
     return () => {
       socket.off("CheckLogsNotif", handleCheck);
+      socket.off("UserDeactiveNotification", handleCheckuserDeactivation);
+      socket.off("UserActiveNotification", handleCheckuser);
+      socket.off("disconnect", handleCheckuserDeactivation);
 
     };
   }, []);
@@ -43,19 +67,19 @@ export default function App() {
 
   return (
     <>
-  <Toaster />
+      <Toaster />
 
-  <Navbar />
+      <Navbar />
 
 
-<AddMembers></AddMembers>
+      {/* <AddMembers></AddMembers> */}
 
       <ApiStatus />
       <Graph />
       <ApiPerfomance />
       <RecentApilogs />
-    
-  
-</>
+
+
+    </>
   );
 }
