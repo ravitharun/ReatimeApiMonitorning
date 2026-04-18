@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import Navbar from "./components/Navbar";
 import ApiPerfomance from "./pages/ApiPerfomance";
 import ApiStatus from "./pages/ApiStatus";
