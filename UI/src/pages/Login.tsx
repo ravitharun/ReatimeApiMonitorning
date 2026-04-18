@@ -15,22 +15,23 @@ const LoginForm = () => {
     const handleLogin = async () => {
         // console.log();
         const userinfo = { userEmail, userPassword, role }
-        console.log(userinfo, 'userinfo');
 
         try {
-            const response: any = await AuthLoginUser(userinfo)
-            console.log('login response', response.data);
-            if (response.data.message = "ok") {
-                return toast.success("hey user")
+            const response = await AuthLoginUser(userinfo)
+            console.log('login response', response);
+            if (response.data.message == 'ok') {
+                localStorage.setItem("token",response.data.token)
+                localStorage.setItem("userInfo",JSON.stringify(response.data.user))
+                toast.success("Logined")
+                return setTimeout(() => {
+                    window.location.href = '/'
+                }, 2000);
             }
-            if (response.data.message = "role  is incorrect") {
-                return toast.success("role  is incorrect")
-            }
+
         } catch (error: any) {
-            if (error) {
-                console.log("error --->", error.message);
-                return toast.success("role  is incorrect")
-            }
+            console.log(error);
+
+            toast.error(error)
         }
 
     };

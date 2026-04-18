@@ -14,8 +14,6 @@ export const AuthUsernewAccount = async (data: FormData) => {
 };
 export const AuthLoginUser = async (userinfo: userlogin) => {
   try {
-    console.log(userinfo, 'userinfo Api calll');
-
     const response = await API.get(
       "/monitoring/AuthUser/Login", {
       params: {
@@ -26,9 +24,8 @@ export const AuthLoginUser = async (userinfo: userlogin) => {
     }
     );
     return response;
-  } catch (error:any) {
-    console.log(error);
-    
-    return error.message;
+  } catch (error: any) {
+    return error
+
   }
 };

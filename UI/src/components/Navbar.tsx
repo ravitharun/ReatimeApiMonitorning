@@ -14,16 +14,16 @@ import {
 import Sidebar from "./Sidebar";
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [dark, setDark] = useState(false);
 
   const menu = [
-    { name: "Team Member Management", icon: <FiUserPlus /> },
-    { name: "Team Members", icon: <FiUsers /> },
-    { name: "API Monitoring", icon: <FiActivity /> },
-    { name: "Analytics", icon: <FiBarChart2 /> },
-    { name: "Logs", icon: <FiDatabase /> },
-    { name: "Settings", icon: <FiSettings /> },
+    { name: "Team Member Management", icon: <FiUserPlus />,url:"/TeamMembersManagemenet" },
+    { name: "Team Members", icon: <FiUsers />,url:"/TeamMembers" },
+    { name: "API Monitoring", icon: <FiActivity />,url:"/" },
+    { name: "Analytics", icon: <FiBarChart2 /> ,url:"/Analytics"},
+    { name: "Logs", icon: <FiDatabase /> ,url:"/Logs"},
+    // { name: "Settings", icon: <FiSettings />,url:"/" },
     
   ];
 
