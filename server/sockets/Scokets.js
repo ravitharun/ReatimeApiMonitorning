@@ -17,12 +17,12 @@ const initSocket = (server) => {
         const userid = socket.handshake.query.userId
         const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: true }, { new: true })
 
-        io.emit("UserActiveNotification", `hey ${userUpdateActive.username} is in online`)
+        io.emit("UserActiveNotification", `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} is in online`)
         socket.on("disconnect", async () => {
             console.log("❌ User disconnected:", socket.id);
         
             const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: false,lastSeen:new Date() }, { new: true })
-            io.emit("UserDeactiveNotification", `hey ${userUpdateActive.username} went offline.`)
+            io.emit("UserDeactiveNotification", `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} went offline.`)
         });
     });
 
