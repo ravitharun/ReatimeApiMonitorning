@@ -42,11 +42,16 @@ function Navbar({ page }: currentpage) {
 
 
     const handleCheckuser = (data: any) => {
-      const text: boolean = data.split("-")[1].split(" ")[0] == JSON.parse(userinfo).userEmpId
+      console.log(data);
+
+      const text: boolean = data.msg.split("-")[1].split(" ")[0] == JSON.parse(userinfo).userEmpId
       if (text) {
-        return toast.success("You are in online")
+        toast.success("You are in online")
+        return localStorage.setItem("userInfo", JSON.stringify(data.userUpdateActive))
+
       }
       toast.success(data)
+
     }
     const handleCheckuserDeactivation = (data: any) => {
       const text: boolean = data.split("-")[1].split(" ")[0] == JSON.parse(userinfo).userEmpId
@@ -55,9 +60,11 @@ function Navbar({ page }: currentpage) {
       }
       toast.error(data)
     }
+
     socket.on("CheckLogsNotif", handleCheck);
     socket.on("UserActiveNotification", handleCheckuser);
     socket.on("UserDeactiveNotification", handleCheckuserDeactivation);
+    socket.on("updatelocalstatus", handleCheckuserDeactivation);
     return () => {
       socket.off("CheckLogsNotif", handleCheck);
       socket.off("UserDeactiveNotification", handleCheckuserDeactivation);

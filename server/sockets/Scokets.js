@@ -16,13 +16,13 @@ const initSocket = (server) => {
         console.log("⚡ User connected:", socket.id);
         const userid = socket.handshake.query.userId
         const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: true }, { new: true })
-
-        io.emit("UserActiveNotification", `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} is in online`)
+                io.emit("UserActiveNotification", { msg: `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} is in online`, userUpdateActive })
         socket.on("disconnect", async () => {
             console.log("❌ User disconnected:", socket.id);
         
             const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: false,lastSeen:new Date() }, { new: true })
-            io.emit("UserDeactiveNotification", `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} went offline.`)
+            io.emit("UserDeactiveNotification", { msg: `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} is in online`, userUpdateActive })
+            io.emit("updatelocalstatus", userUpdateActive)
         });
     });
 

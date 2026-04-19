@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { FiUser, FiMail, FiEye } from "react-icons/fi";
+import { FaTimes, FaUsers } from "react-icons/fa";
+import AssignTeamModal from "./AssignTeamModal";
 
 function AddmemberList() {
+  const [isOpen, setisopen] = useState<boolean>(false)
   const members = [
     {
       id: "E101",
@@ -24,116 +28,124 @@ function AddmemberList() {
       status: "online",
     },
   ];
-
+  const HandelAssigin = () => {
+    setisopen((prev) => !prev)
+  }
   return (
-    <div className="min-h-screen bg-[#0b1220] p-6">
+    <>
 
-     <div className="mb-6 flex items-center justify-between">
+      {isOpen && <>
+        {/* give me the ui like to assigin into the team like dropwon of teamname and next link emp id by spreted by , vaues like these with react icon give me in simple amd close button icon also poup in middlepage i want */}
+       <AssignTeamModal isOpen={isOpen} setisopen={setisopen} ></AssignTeamModal>
+      </>}
+      <div className="min-h-screen bg-[#0b1220] p-6">
 
-  {/* Left Side - Title */}
-  <div>
-    <h1 className="text-2xl font-bold text-white">
-      Team Members
-    </h1>
-    <p className="text-gray-400 text-sm">
-      Manage and view developer profiles
-    </p>
-  </div>
+        <div className="mb-6 flex items-center justify-between">
 
-  {/* Right Side - Button */}
-  <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition shadow-md">
-    <span className="text-lg">+</span>
-    Assign Team Member
-  </button>
+          {/* Left Side - Title */}
+          <div>
+            <h1 className="text-2xl font-bold text-white">
+              Team Members
+            </h1>
+            <p className="text-gray-400 text-sm">
+              Manage and view developer profiles
+            </p>
+          </div>
 
-</div>
+          {/* Right Side - Button */}
+          <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition shadow-md" onClick={HandelAssigin}>
+            <span className="text-lg">+</span>
+            Assign Team Member
+          </button>
 
-      {/* TABLE */}
-      <div className="overflow-x-auto rounded-xl border border-gray-800">
+        </div>
 
-        {/* Table Header */}
-        <table className="w-full text-left text-sm text-gray-300">
+        {/* TABLE */}
+        <div className="overflow-x-auto rounded-xl border border-gray-800">
 
-          <thead className="bg-[#111827] text-gray-400 uppercase text-xs">
-            <tr>
-              <th className="p-4">Developer</th>
-              <th className="p-4">Emp ID</th>
-              <th className="p-4">Contact Email</th>
-              <th className="p-4">Online Status</th>
-              <th className="p-4 text-right">Manage Profile</th>
-            </tr>
-          </thead>
+          {/* Table Header */}
+          <table className="w-full text-left text-sm text-gray-300">
 
-          {/* Table Body */}
-          <tbody>
-            {members.map((m, i) => (
-              <tr
-                key={i}
-                className="border-b border-gray-800 hover:bg-[#111827] transition"
-              >
+            <thead className="bg-[#111827] text-gray-400 uppercase text-xs">
+              <tr>
+                <th className="p-4">Developer</th>
+                <th className="p-4">Emp ID</th>
+                <th className="p-4">Contact Email</th>
+                <th className="p-4">Online Status</th>
+                <th className="p-4 text-right">Manage Profile</th>
+              </tr>
+            </thead>
 
-                {/* Developer */}
-                <td className="p-4 flex items-center gap-3">
-                  <img
-                    src={m.img}
-                    alt="avatar"
-                    className="w-10 h-10 rounded-full border border-gray-700"
-                  />
-                  <span className="text-white font-medium flex items-center gap-2">
-                    <FiUser /> {m.name}
-                  </span>
-                </td>
+            {/* Table Body */}
+            <tbody>
+              {members.map((m, i) => (
+                <tr
+                  key={i}
+                  className="border-b border-gray-800 hover:bg-[#111827] transition"
+                >
 
-                {/* Emp ID */}
-                <td className="p-4">
-                  <span className="px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-xs">
-                    {m.id}
-                  </span>
-                </td>
+                  {/* Developer */}
+                  <td className="p-4 flex items-center gap-3">
+                    <img
+                      src={m.img}
+                      alt="avatar"
+                      className="w-10 h-10 rounded-full border border-gray-700"
+                    />
+                    <span className="text-white font-medium flex items-center gap-2">
+                      <FiUser /> {m.name}
+                    </span>
+                  </td>
 
-                {/* Email */}
-                <td className="p-4 flex items-center gap-2">
-                  <FiMail className="text-gray-500" />
-                  {m.email}
-                </td>
+                  {/* Emp ID */}
+                  <td className="p-4">
+                    <span className="px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-xs">
+                      {m.id}
+                    </span>
+                  </td>
 
-                {/* Status */}
-                <td className="p-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-2 w-fit
-                      ${
-                        m.status === "online"
+                  {/* Email */}
+                  <td className="p-4 flex items-center gap-2">
+                    <FiMail className="text-gray-500" />
+                    {m.email}
+                  </td>
+
+                  {/* Status */}
+                  <td className="p-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-2 w-fit
+                      ${m.status === "online"
                           ? "text-green-400 bg-green-500/10"
                           : "text-red-400 bg-red-500/10"
-                      }`}
-                  >
-                    <span
-                      className={`w-2 h-2 rounded-full
-                        ${
-                          m.status === "online"
+                        }`}
+                    >
+                      <span
+                        className={`w-2 h-2 rounded-full
+                        ${m.status === "online"
                             ? "bg-green-500 animate-pulse"
                             : "bg-red-500"
-                        }`}
-                    />
-                    {m.status}
-                  </span>
-                </td>
+                          }`}
+                      />
+                      {m.status}
+                    </span>
+                  </td>
 
-                {/* Manage Profile */}
-                <td className="p-4 text-right">
-                  <button className="flex items-center gap-2 ml-auto bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-md transition">
-                    <FiEye />
-                    Manage Profile
-                  </button>
-                </td>
+                  {/* Manage Profile */}
+                  <td className="p-4 text-right">
+                    <button className="flex items-center gap-2 ml-auto bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-md transition">
+                      <FiEye />
+                      Manage Profile
+                    </button>
+                  </td>
 
-              </tr>
-            ))}
-          </tbody>
+                </tr>
+              ))}
+            </tbody>
 
-        </table>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
+
   );
 }
 
