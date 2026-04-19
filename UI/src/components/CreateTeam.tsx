@@ -1,24 +1,40 @@
 import { useState } from "react";
 import { FiUsers, FiFileText, FiHash, FiUserPlus } from "react-icons/fi";
-import { userRole } from "../servies/apivesrion";
+import { userinfo, userRole } from "../servies/apivesrion";
 import toast, { Toaster } from "react-hot-toast";
 import Input from "./Input";
+import { MakeTeam } from "../servies/Team";
 
 function CreateTeam() {
     const [teamName, setTeamName] = useState("");
     const [teamDesc, setTeamDesc] = useState("");
     const [empIds, setEmpIds] = useState("");
-    const handelTeamCreation = () => {
-
+    const handelTeamCreation = async () => {
+        const parsedUser = JSON.parse(userinfo)?.userEmpId;
         if (userRole != 'teamLeader') {
             return toast.error("only the Team Leader can Create team")
         }
+        const empIdsArray = empIds.split(","); // "1,2" → ["1","2"]
+        console.log(empIdsArray);
+        
 
-
-        console.log({ teamName, teamDesc, empIds });
+        const data = { teamName, teamDesc, empIds: empIdsArray, CreatedByID: parsedUser }
 
         if (!teamName || !teamDesc || !empIds) {
             return toast.error('Fill the required details to make the team')
+        }
+
+
+
+        try {
+
+            const response = await MakeTeam(data)
+            console.log(response);
+
+        }
+        catch (err) {
+            console.log(err, "err MAKE TEAM");
+
         }
     }
     const isNewTeam: boolean = false

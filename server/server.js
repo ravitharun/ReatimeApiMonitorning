@@ -8,6 +8,7 @@ const { initSocket } = require("./sockets/Scokets");
 const AppExp = require("./routes/checkRoute");
 const connectDB = require("./config/Db");
 const Auth = require("./routes/AuthRouter");
+const Team = require("./routes/TeamRouter");
 
 
 
@@ -45,6 +46,8 @@ app.use(express.json());
 // =====================
 app.use("/AppExp", AppExp);
 app.use("/monitoring/AuthUser", Auth);
+app.use("/monitoring/Teams", Team);
+
 app.get("/", (req, res) => {
   res.send("Server is running 🚀");
 
