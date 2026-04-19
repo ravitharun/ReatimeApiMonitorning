@@ -25,21 +25,30 @@ const MakeTeams = async (req, res) => {
 // get all teams by the team leader by Empid
 const getAllTeams = async (req, res) => {
     try {
-        const { id } = req.query;
-
-        console.log(req.query);
+        const { id, type } = req.query;
+        // GetBydeveloper
+        console.log({ id, type });
 
         if (!id) {
             return res.status(400).json({ message: "User id is required" });
         }
-
-
         const teams = await Teams.find({ CreatedByID: id });
+        const getteams = await Teams.find({});
+        console.log(getteams, 'getteams');
 
-        const users = await user.find().select(['username','userEmpId','userRole','isActive','userProfile','lastSeen']);
+        const users = await user.find().select(['username', 'userEmpId', 'userRole', 'isActive', 'userProfile', 'lastSeen']);
 
         // Enrich teams with member details
-        const updatedTeams = teams.map((team) => {
+        const updatedTeams = type == 'GetBydeveloper' ? getteams.map((team) => {
+            const members = team.empIds.map((empId) => {
+                return users.find((u) => u.userEmpId.toString() === empId);
+            });
+
+            return {
+                ...team._doc,
+                members,
+            };
+        }) : teams.map((team) => {
             const members = team.empIds.map((empId) => {
                 return users.find((u) => u.userEmpId.toString() === empId);
             });

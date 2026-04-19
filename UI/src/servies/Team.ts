@@ -1,6 +1,6 @@
 import type { teamFormat } from "../Type/Team"
 import API from "./api"
-import { userEmpid, userinfo } from "./apivesrion"
+import { userEmpid, userRole } from "./apivesrion"
 
 export const MakeTeam = async (team: teamFormat) => {
     try {
@@ -13,11 +13,12 @@ export const MakeTeam = async (team: teamFormat) => {
 }
 export const getallTeamsInfo = async () => {
     try {
-        console.log(userEmpid,'userinfo.userEmpIds');
-        
+        console.log(userEmpid, 'userinfo.userEmpIds');
+
         const response = await API.get('/monitoring/Teams/GetTeams', {
             params: {
-                id: userEmpid
+                id: userEmpid,
+                type: userRole == 'developer' ? "GetBydeveloper" : "GetByteamleader"
             }
         })
         // const response = await API.get(`/monitoring/Teams/GetTeams?id=${userEmpid}`)

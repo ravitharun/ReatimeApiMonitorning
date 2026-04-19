@@ -1,4 +1,4 @@
-import AddmemberList from "../components/AddmemberList"
+// import AddmemberList from "../components/AddmemberList"
 import CreateTeam from "../components/CreateTeam"
 import Navbar from "../components/Navbar"
 
