@@ -1,4 +1,5 @@
 import { FaTimes, FaUsers } from "react-icons/fa";
+import { userRole } from "../servies/apivesrion";
 type Assigin = {
     isOpen: boolean,
     setisopen: any
@@ -6,7 +7,11 @@ type Assigin = {
 const AssignTeamModal = ({ isOpen, setisopen }: Assigin) => {
     if (!isOpen) return null;
     const onAssign = () => {
-        alert("onAssign")
+        if (userRole != 'teamLeader') {
+
+            return alert("No only team leader")
+        }
+         alert("add")
     }
 
     return (

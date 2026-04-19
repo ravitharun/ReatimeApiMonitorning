@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiUser, FiMail, FiEye } from "react-icons/fi";
 import { FaTimes, FaUsers } from "react-icons/fa";
 import AssignTeamModal from "./AssignTeamModal";
+import { userRole } from "../servies/apivesrion";
 
 function AddmemberList() {
   const [isOpen, setisopen] = useState<boolean>(false)
@@ -29,6 +30,10 @@ function AddmemberList() {
     },
   ];
   const HandelAssigin = () => {
+    if(userRole!='teamLeader'){
+      setisopen(false)
+      return alert("Only the Team Leader can add the Member")
+    }
     setisopen((prev) => !prev)
   }
   return (
