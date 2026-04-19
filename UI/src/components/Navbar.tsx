@@ -13,7 +13,7 @@ import {
 import Sidebar from "./Sidebar";
 import { socket } from "../servies/Scokets";
 import toast, { Toaster } from "react-hot-toast";
-import { userinfo } from "../servies/apivesrion";
+import { userinfo, userRole } from "../servies/apivesrion";
 type currentpage = {
   page?: any
 }
@@ -84,7 +84,7 @@ function Navbar({ page }: currentpage) {
   const menu = [
     { name: "API Monitoring", icon: <FiActivity />, url: "/" },
     { name: "Team Members", icon: <FiUsers />, url: "/TeamMembers" },
-    { name: "Team Member Management", icon: <FiUserPlus />, url: "/TeamMembersManagemenet" },
+    { name: "Team Member Management", icon: <FiUserPlus />, url: "/TeamMembersManagemenet" ,disable:userRole=='developer'},
     { name: "Analytics", icon: <FiBarChart2 />, url: "/Analytics" },
     { name: "Logs", icon: <FiDatabase />, url: "/Logs" },
     // { name: "Settings", icon: <FiSettings />,url:"/" },

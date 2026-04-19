@@ -10,7 +10,8 @@ type MenuItem = {
     name: string;
     icon: React.ReactNode;
     desc?: string;
-    url: string
+    url: string,
+    disable?:boolean
 };
 
 type Props = {
