@@ -11,7 +11,7 @@ function TeamMembersManagemenet() {
 
         <div className="mt-13">
           <CreateTeam></CreateTeam>
-          <AddmemberList></AddmemberList>
+          {/* <AddmemberList></AddmemberList> */}
         </div>
       </div>
 

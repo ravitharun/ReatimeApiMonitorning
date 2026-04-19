@@ -1,5 +1,6 @@
 const express = require("express")
-const MakeTeams = require("../controllers/ManageTeams")
+const {MakeTeams,getAllTeams} = require("../controllers/ManageTeams")
 const Team = express.Router()
 Team.post("/MakeTeams", MakeTeams)
+Team.get("/GetTeams", getAllTeams)
 module.exports = Team
