@@ -4,20 +4,19 @@ import { userinfo, userRole } from "../servies/apivesrion";
 import toast, { Toaster } from "react-hot-toast";
 import Input from "./Input";
 import { MakeTeam } from "../servies/Team";
+import { useNavigate } from "react-router-dom";
 
 function CreateTeam() {
     const [teamName, setTeamName] = useState("");
     const [teamDesc, setTeamDesc] = useState("");
     const [empIds, setEmpIds] = useState("");
+    const navigate = useNavigate()
     const handelTeamCreation = async () => {
         const parsedUser = JSON.parse(userinfo)?.userEmpId;
         if (userRole != 'teamLeader') {
             return toast.error("only the Team Leader can Create team")
         }
-        const empIdsArray = empIds.split(","); // "1,2" → ["1","2"]
-        console.log(empIdsArray);
-        
-
+        const empIdsArray = empIds.split(",");
         const data = { teamName, teamDesc, empIds: empIdsArray, CreatedByID: parsedUser }
 
         if (!teamName || !teamDesc || !empIds) {
@@ -28,8 +27,15 @@ function CreateTeam() {
 
         try {
 
-            const response = await MakeTeam(data)
+            const response: any = await MakeTeam(data)
             console.log(response);
+            if (response?.status == 201) {
+                toast.success("Team Created.")
+                return setTimeout(() => {
+                    navigate("/TeamMembers")
+                }, 2500);
+
+            }
 
         }
         catch (err) {

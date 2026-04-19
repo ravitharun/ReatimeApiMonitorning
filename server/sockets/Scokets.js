@@ -14,13 +14,17 @@ const initSocket = (server) => {
 
     io.on("connection", async (socket) => {
         console.log("⚡ User connected:", socket.id);
+        const onlineUsers = new Map()
         const userid = socket.handshake.query.userId
+        onlineUsers.set(userid, socket.id);
         const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: true }, { new: true })
-                io.emit("UserActiveNotification", { msg: `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} is in online`, userUpdateActive })
+        io.emit("UserActiveNotification", { msg: `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} is in online`, userUpdateActive })
         socket.on("disconnect", async () => {
             console.log("❌ User disconnected:", socket.id);
-        
-            const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: false,lastSeen:new Date() }, { new: true })
+
+            const userUpdateActive = await User.findOneAndUpdate({ userEmpId: userid }, { isActive: false, lastSeen: new Date() }, { new: true })
+            console.log(userUpdateActive, 'userUpdateActive')
+            onlineUsers.delete(userid);
             io.emit("UserDeactiveNotification", { msg: `hey ${userUpdateActive?.username}-${userUpdateActive?.userEmpId} is in online`, userUpdateActive })
             io.emit("updatelocalstatus", userUpdateActive)
         });
