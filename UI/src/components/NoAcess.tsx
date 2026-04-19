@@ -1,4 +1,3 @@
-import React from "react";
 import { FiLock, FiUsers, FiArrowLeft } from "react-icons/fi";
 
 function NoAccess() {

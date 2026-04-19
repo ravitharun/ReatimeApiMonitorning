@@ -1,6 +1,6 @@
 import type { teamFormat } from "../Type/Team"
 import API from "./api"
-import { userEmpid, userinfo, userRole } from "./apivesrion"
+import { userEmpid, userRole } from "./apivesrion"
 
 export const MakeTeam = async (team: teamFormat) => {
     try {
