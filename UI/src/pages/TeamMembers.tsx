@@ -30,6 +30,8 @@ type Team = {
 
 function TeamMembers() {
     const [allTeams, setAllTeams] = useState<Team[]>([]);
+    console.log(allTeams,'allTeams');
+    
 
     useEffect(() => {
         const getTeams = async () => {
