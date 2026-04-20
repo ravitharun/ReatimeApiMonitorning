@@ -3,22 +3,45 @@ const user = require("../models/User");
 
 const MakeTeams = async (req, res) => {
     try {
-        const { Team } = req.body
-        console.log(Team, 'Team')
-        const savetm = await new Teams({
-            teamName: Team.teamName, teamDesc: Team.teamDesc,
+        const { Team } = req.body;
+
+        const allUsers = await user.find({}, { userEmpId: 1 });
+
+        const existingIds = new Set(
+            allUsers.map(u => u.userEmpId)
+        );
+        
+        const notFound = [];
+
+        for (let id of Team.empIds) {
+            if (!existingIds.has(id)) {
+                notFound.push(id);
+            }
+        }
+
+        if (notFound.length > 0) {
+            return res.status(404).json({
+                message: "Some EmpIds are not matched",
+                IDSNOTMatched: notFound
+            });
+        }
+
+        // Save team only if all IDs exist
+        const savetm = new Teams({
+            teamName: Team.teamName,
+            teamDesc: Team.teamDesc,
             empIds: Team.empIds,
             CreatedByID: Team.CreatedByID,
             TotalMember: Team.empIds.length
-        })
-        await savetm.save()
-        return res.status(201).json({ message: "ok" })
+        });
+
+        await savetm.save();
+
+        return res.status(201).json({ message: "Team created successfully" });
 
     } catch (error) {
         console.log(error.message);
-
-        return res.status(500).json({ message: error })
-
+        return res.status(500).json({ message: error.message });
     }
 }
 
@@ -58,6 +81,7 @@ const getAllTeams = async (req, res) => {
                 members,
             };
         });
+        console.log(updatedTeams, 'updatedTeams');
 
         return res.status(200).json({
             status: true,
