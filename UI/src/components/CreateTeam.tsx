@@ -7,6 +7,7 @@ import { MakeTeam } from "../servies/Team";
 import { useNavigate } from "react-router-dom";
 import NoAccess from "./NoAcess";
 
+
 function CreateTeam() {
     const [teamName, setTeamName] = useState("");
     const [teamDesc, setTeamDesc] = useState("");
@@ -25,13 +26,16 @@ function CreateTeam() {
         }
 
 
-
         try {
 
             const response: any = await MakeTeam(data)
-            console.log(response);
+            console.log(response.data.message);
             if (response?.status == 201) {
                 toast.success("Team Created.")
+                setTeamName("")
+                setTeamDesc("")
+                setEmpIds("")
+
                 return setTimeout(() => {
                     navigate("/TeamMembers")
                 }, 2500);
@@ -39,9 +43,16 @@ function CreateTeam() {
             }
 
         }
-        catch (err) {
-            console.log(err, "err MAKE TEAM");
-
+        catch (err: any) {
+            console.log(err?.response)
+            const errorMessage =
+                err?.response?.data?.message ||
+                err?.message ||
+                "Error occurred";
+            if (err?.response?.data?.message === 'Some EmpIds are not matched') {
+                toast.error(`'Some EmpIds are not matched'  id are ${err?.response.data.IDSNOTMatched}`)
+            }
+            console.log(errorMessage, "err MAKE TEAM");
         }
     }
     const isNewTeam: boolean = false

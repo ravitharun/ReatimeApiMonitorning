@@ -9,7 +9,7 @@ export const AuthUsernewAccount = async (data: FormData) => {
     );
     return response;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 export const AuthLoginUser = async (userinfo: userlogin) => {
@@ -25,7 +25,7 @@ export const AuthLoginUser = async (userinfo: userlogin) => {
     );
     return response;
   } catch (error: any) {
-    return error
+    throw error
 
   }
 };

@@ -5,9 +5,11 @@ import { userEmpid, userRole } from "./apivesrion"
 export const MakeTeam = async (team: teamFormat) => {
     try {
         const response = await API.post("/monitoring/Teams/MakeTeams", { Team: team })
+   
         return response
     } catch (error) {
-        return error
+     
+         throw error; 
 
     }
 }
@@ -24,6 +26,6 @@ export const getallTeamsInfo = async () => {
         // const response = await API.get(`/monitoring/Teams/GetTeams?id=${userEmpid}`)
         return response
     } catch (error) {
-        return error
+        throw error
     }
 }
