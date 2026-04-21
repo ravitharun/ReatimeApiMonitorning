@@ -6,7 +6,6 @@ import {
     Tooltip,
     ResponsiveContainer,
     CartesianGrid,
-    Bar,
 } from "recharts";
 import { Download } from "./Download";
 
@@ -28,23 +27,6 @@ function ResponseTimeData() {
         { time: "10:03", responseTime: 200 },
         { time: "10:04", responseTime: 750 },
     ];
-    // const TimeData = [
-    //     { time: "10:00", responseTime: 120 },
-    //     { time: "10:01", responseTime: 12 },
-    //     { time: "10:01", responseTime: 212 },
-    //     { time: "10:01", responseTime: 212 },
-    //     { time: "10:01", responseTime: 22 },
-    //     { time: "10:01", responseTime: 212 },
-    //     { time: "10:01", responseTime: 212 },
-    //     { time: "10:01", responseTime: 212 },
-    //     { time: "10:01", responseTime: 221 },
-    //     { time: "10:01", responseTime: 22 },
-    //     { time: "10:01", responseTime: 300 },
-    //     { time: "10:02", responseTime: 50 },
-    //     { time: "10:03", responseTime: 33 },
-    //     { time: "10:04", responseTime: 74 },
-    // ];
-
     const rpsData = [
         { time: "10:00", rps: 5 },
         { time: "10:01", rps: 9 },
@@ -79,8 +61,7 @@ function ResponseTimeData() {
                         <YAxis />
                         <Tooltip />
                         <Line type="monotone" dataKey="responseTime" stroke="#3b82f6" strokeWidth={2} />
-                        {/* <Line type="monotone" dataKey="responseTime" stroke="#3b82f6" strokeWidth={2} /> */}
-                        {/* <Bar dataKey="responseTime" barSize={20} fill="red"/> */}
+                  
                     </LineChart>
                 </ResponsiveContainer>
                 <button

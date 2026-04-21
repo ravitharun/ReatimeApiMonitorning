@@ -24,7 +24,7 @@
     "socket.io": "^4.8.3"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.4",
     "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.5.0"
