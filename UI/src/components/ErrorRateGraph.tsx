@@ -17,13 +17,19 @@ import { Download } from './Download';
 function ErrorRateGraph({ Geaphname, descprition }: props) {
   const data =
     [
-      { time: "10:00", errorRate: 0 },
-      { time: "11:00", errorRate: 2 },
-      { time: "12:00", errorRate: 5 },
-      { time: "13:00", errorRate: 1 },
-      { time: "14:00", errorRate: 8 },
-      { time: "15:00", errorRate: 3 },
-      { time: "16:00", errorRate: 10 }
+      { time: "10:00", errorRate: 100 },
+      { time: "11:00", errorRate: 23 },
+      { time: "11:00", errorRate: 23 },
+      { time: "12:00", errorRate: 300 },
+      { time: "13:00", errorRate: 12 },
+      { time: "13:00", errorRate: 123 },
+      { time: "12:00", errorRate: 300 },
+      { time: "14:00", errorRate: 82 },
+      { time: "13:00", errorRate: 133 },
+      { time: "15:00", errorRate: 131 },
+      { time: "13:00", errorRate: 153 },
+      { time: "13:00", errorRate: 173 },
+      { time: "16:00", errorRate: 102 }
     ];
 
   return (

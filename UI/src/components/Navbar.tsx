@@ -60,13 +60,19 @@ function Navbar({ page }: currentpage) {
       }
       toast.error(data)
     }
-
+    const handleNotify = (data: any) => {
+      console.log(data,'updated : new data in logs');
+      
+      toast.success(data)
+    }
     socket.on("CheckLogsNotif", handleCheck);
     socket.on("UserActiveNotification", handleCheckuser);
     socket.on("UserDeactiveNotification", handleCheckuserDeactivation);
     socket.on("updatelocalstatus", handleCheckuserDeactivation);
+    socket.on("Notify", handleNotify);
     return () => {
       socket.off("CheckLogsNotif", handleCheck);
+      socket.off("Notify", handleNotify);
       socket.off("UserDeactiveNotification", handleCheckuserDeactivation);
       socket.off("UserActiveNotification", handleCheckuser);
       socket.off("disconnect", handleCheckuserDeactivation);
@@ -84,7 +90,7 @@ function Navbar({ page }: currentpage) {
   const menu = [
     { name: "API Monitoring", icon: <FiActivity />, url: "/" },
     { name: "Team Members", icon: <FiUsers />, url: "/TeamMembers" },
-    { name: "Team Member Management", icon: <FiUserPlus />, url: "/TeamMembersManagemenet" ,disable:userRole=='developer'},
+    { name: "Team Member Management", icon: <FiUserPlus />, url: "/TeamMembersManagemenet", disable: userRole == 'developer' },
     { name: "Analytics", icon: <FiBarChart2 />, url: "/Analytics" },
     { name: "Logs", icon: <FiDatabase />, url: "/Logs" },
     // { name: "Settings", icon: <FiSettings />,url:"/" },

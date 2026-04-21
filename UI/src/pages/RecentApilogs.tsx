@@ -1,36 +1,19 @@
+import { useEffect, useState } from "react"
+import { FetchAllLogs } from "../servies/GetApiLogs"
 
 
 function RecentApilogs() {
-  const logs = [
-    {
-      time: "10:45 AM",
-      endpoint: "/login",
-      method: "POST",
-      status: "OK",
-      message: "User logged in successfully",
-    },
-    {
-      time: "10:47 AM",
-      endpoint: "/fetchUser",
-      method: "GET",
-      status: "Slow",
-      message: "Response delayed",
-    },
-    {
-      time: "10:50 AM",
-      endpoint: "/createPost",
-      method: "POST",
-      status: "Error",
-      message: "Internal server error",
-    },
-    {
-      time: "10:52 AM",
-      endpoint: "/getProjects",
-      method: "GET",
-      status: "OK",
-      message: "Data fetched successfully",
-    },
-  ];
+    const [apilogs, setlogsapidata] = useState<any[]>([])
+
+
+    useEffect(() => {
+        const FetchAllApiLogs = async () => {
+            const response = await FetchAllLogs()
+            console.log(response.data.message)
+            setlogsapidata(response.data.message)
+        }
+        FetchAllApiLogs()
+    }, [])
 
   const getStatusStyle = (status: string) => {
     switch (status) {
@@ -73,7 +56,7 @@ function RecentApilogs() {
       </h2>
 
       <div className="space-y-3 max-h-[300px] overflow-y-auto">
-        {logs.map((log, index) => (
+        {apilogs?.map((log, index) => (
           <div
             key={index}
             className="flex flex-col md:flex-row md:items-center justify-between p-3 border rounded-lg hover:bg-gray-50 transition"
@@ -81,14 +64,14 @@ function RecentApilogs() {
             {/* Left */}
             <div>
               <p className={`text-sm font-medium text-gray-800 ${GetApiMethod(log.method)}`}>
-                {log.method} <span>{log.endpoint}</span>
+                {log.method} <span>{log.originalUrl}</span>
               </p>
-              <p className="text-xs text-gray-500">{log.message}</p>
+              <p className="text-xs text-gray-500"><span>Apihealth</span> : {log.apihealth}</p>
             </div>
 
             {/* Right */}
             <div className="flex items-center gap-4 mt-2 md:mt-0">
-              <span className="text-xs text-gray-500">{log.time}</span>
+              <span className="text-xs text-gray-500">{log.timestamp}</span>
               <span
                 className={`text-xs font-semibold ${getStatusStyle(
                   log.status

@@ -9,6 +9,7 @@ const AppExp = require("./routes/checkRoute");
 const connectDB = require("./config/Db");
 const Auth = require("./routes/AuthRouter");
 const Team = require("./routes/TeamRouter");
+const Logs = require("./routes/LogsRoute");
 
 
 
@@ -47,6 +48,7 @@ app.use(express.json());
 app.use("/AppExp", AppExp);
 app.use("/monitoring/AuthUser", Auth);
 app.use("/monitoring/Teams", Team);
+app.use("/monitoring/Logs", Logs);
 
 app.get("/", (req, res) => {
   res.send("Server is running 🚀");

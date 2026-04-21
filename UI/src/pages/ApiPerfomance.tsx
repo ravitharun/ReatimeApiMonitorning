@@ -1,36 +1,23 @@
+import { useEffect, useState } from "react";
+import { FetchAllLogs } from "../servies/GetApiLogs";
 
 function ApiPerfomance() {
-    
-    const apiData = [
-        {
-            endpoint: "/login",
-            status: "OK",
-            responseTime: "120ms",
-            errorRate: "0%",
-        },
-        {
-            endpoint: "/fetchUser",
-            status: "Slow",
-            responseTime: "850ms",
-            errorRate: "2%",
-        },
-        {
-            endpoint: "/createPost",
-            status: "Error",
-            responseTime: "—",
-            errorRate: "15%",
-        },
-        {
-            endpoint: "/getProjects",
-            status: "OK",
-            responseTime: "200ms",
-            errorRate: "0%",
-        },
-    ];
+    const [apilogs, setlogsapidata] = useState<any[]>([])
+
+
+    useEffect(() => {
+        const FetchAllApiLogs = async () => {
+            const response = await FetchAllLogs()
+            console.log(response.data.message)
+            setlogsapidata(response.data.message)
+        }
+        FetchAllApiLogs()
+    }, [])
+
 
     const getStatusStyle = (status: string) => {
         switch (status) {
-            case "OK":
+            case "SUCCESS":
                 return "bg-green-100 text-green-700";
             case "Slow":
                 return "bg-yellow-100 text-yellow-700";
@@ -56,19 +43,21 @@ function ApiPerfomance() {
                             <tr className="bg-gray-100 text-gray-600 uppercase text-xs">
                                 <th className="p-3">Endpoint</th>
                                 <th className="p-3">Status</th>
+                                <th className="p-3">apihealth</th>
+                                <th className="p-3">statusCode</th>
                                 <th className="p-3">Response Time</th>
                                 <th className="p-3">Error Rate</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {apiData.map((api, index) => (
+                            {apilogs?.map((api, index) => (
                                 <tr
                                     key={index}
                                     className="border-b hover:bg-gray-50 transition"
                                 >
                                     <td className="p-3 font-medium text-gray-800">
-                                        {api.endpoint}
+                                        {api.originalUrl}
                                     </td>
 
                                     <td className="p-3">
@@ -82,11 +71,17 @@ function ApiPerfomance() {
                                     </td>
 
                                     <td className="p-3 text-gray-700">
+                                        {api.apihealth}
+                                    </td>
+                                    <td className="p-3 text-gray-700">
+                                        {api.statusCode}
+                                    </td>
+                                    <td className="p-3 text-gray-700">
                                         {api.responseTime}
                                     </td>
 
                                     <td className="p-3 text-gray-700">
-                                        {api.errorRate}
+                                        {api.errorRate || 0}
                                     </td>
                                 </tr>
                             ))}

@@ -15,11 +15,20 @@ import { Download } from "./Download";
 
 // Sample data
 const responseTimeData = [
- { time: "10:00", rps: 20 },
-  { time: "10:01", rps: 35 },
-  { time: "10:02", rps: 25 },
-  { time: "10:03", rps: 40 },
-  { time: "10:04", rps: 30 }
+ { time: "10:00", rps: 220 },
+  { time: "10:01", rps: 122 },
+  { time: "10:02", rps: 254 },
+  { time: "10:03", rps: 403 },
+  { time: "10:04", rps: 310 },
+  { time: "10:04", rps: 33 },
+  { time: "10:04", rps: 333 },
+  { time: "10:04", rps: 323 },
+  { time: "10:04", rps: 123 },
+  { time: "10:04", rps: 423 },
+  { time: "10:04", rps: 523 },
+  { time: "10:04", rps: 30 },
+  { time: "10:04", rps: 1000 },
+  { time: "12:04", rps: 300 }
 ];
 
 export default function Example({ Geaphname, descprition }: props) {
