@@ -1,3 +1,5 @@
+
+// const jwt = require("jsonwebtoken")
 const userMidleware = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
@@ -5,8 +7,8 @@ const userMidleware = async (req, res, next) => {
             console.log({ message: "No token provided" })
             return res.status(401).json({ message: "No token provided" });
         }
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        req.user = decoded;
+        // const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        // req.user = decoded;
         next()
     } catch (err) {
         if (err.name === "TokenExpiredError") {
