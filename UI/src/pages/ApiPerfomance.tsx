@@ -8,8 +8,8 @@ function ApiPerfomance() {
     useEffect(() => {
         const FetchAllApiLogs = async () => {
             const response = await FetchAllLogs()
-            console.log(response.data.message)
-            setlogsapidata(response.data.message)
+            console.log(response.data.data)
+            setlogsapidata(response.data.data)
         }
         FetchAllApiLogs()
     }, [])

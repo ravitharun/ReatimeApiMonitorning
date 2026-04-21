@@ -14,7 +14,7 @@ const check = async (req, res) => {
             });
         }
         const saveLogs = await ApiLogs.create(realtimeApilogs);
-io.emit("Notify", "Update: New logs added. Review status.");
+        io.emit("Notify", "Update: New logs added. Review status.");
         if (realtimeApilogs.status === "SUCCESS") {
             return io.emit("CheckLogsNotif", saveLogs);
         }
