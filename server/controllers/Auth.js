@@ -9,12 +9,7 @@ const AuthNewUser = async (req, res) => {
 
 
         const userinfo = req.body
-        console.log(userinfo, 'userinfo');
 
-        let data = {
-            userPassword: userinfo.userPassword,
-            useremail: userinfo.userEmail,
-        }
         const result = await cloudinary.uploader.upload(req.file?.path);
         const hash = await bcrypt.hash(userinfo.userPassword, saltRounds);
         const saveuser = await user({
@@ -26,7 +21,6 @@ const AuthNewUser = async (req, res) => {
             userProfile: result.secure_url
         })
         await saveuser.save()
-        console.log('db saved');
 
         return res.status(200).json({ status: "true", message: "userNew Account" })
     } catch (error) {
@@ -45,8 +39,8 @@ const LoginUser = async (req, res) => {
         if (!userEmail || !userPassword || !role) { return res.status(404).json({ message: "Inputs are missing." }) }
 
         const getuser = await user.findOne({ userEmail: userEmail })
-        console.log(getuser,'getuser');
-        
+        console.log(getuser, 'getuser');
+
         if (getuser == null) {
             console.log({ message: "User not found with these email." });
 
@@ -66,7 +60,7 @@ const LoginUser = async (req, res) => {
 
         }
         const token = jwt.sign({ userEmail, role }, process.env.JWT_SECRET_KEY)
-        res.status(200).json({ status: true, message: "ok", token: token,user:getuser })
+        res.status(200).json({ status: true, message: "ok", token: token, user: getuser })
     } catch (error) {
         console.log(error.message);
 
