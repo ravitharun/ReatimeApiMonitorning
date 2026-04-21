@@ -6,6 +6,7 @@ import {
     Tooltip,
     ResponsiveContainer,
     CartesianGrid,
+    Bar,
 } from "recharts";
 import { Download } from "./Download";
 
@@ -14,19 +15,52 @@ function ResponseTimeData() {
     const responseTimeData = [
         { time: "10:00", responseTime: 120 },
         { time: "10:01", responseTime: 200 },
-        { time: "10:02", responseTime: 80 },
-        { time: "10:03", responseTime: 300 },
-        { time: "10:04", responseTime: 150 },
+        { time: "10:01", responseTime: 212 },
+        { time: "10:01", responseTime: 212 },
+        { time: "10:01", responseTime: 212 },
+        { time: "10:01", responseTime: 212 },
+        { time: "10:01", responseTime: 212 },
+        { time: "10:01", responseTime: 212 },
+        { time: "10:01", responseTime: 221 },
+        { time: "10:01", responseTime: 400 },
+        { time: "10:01", responseTime: 300 },
+        { time: "10:02", responseTime: 50 },
+        { time: "10:03", responseTime: 200 },
+        { time: "10:04", responseTime: 750 },
     ];
+    // const TimeData = [
+    //     { time: "10:00", responseTime: 120 },
+    //     { time: "10:01", responseTime: 12 },
+    //     { time: "10:01", responseTime: 212 },
+    //     { time: "10:01", responseTime: 212 },
+    //     { time: "10:01", responseTime: 22 },
+    //     { time: "10:01", responseTime: 212 },
+    //     { time: "10:01", responseTime: 212 },
+    //     { time: "10:01", responseTime: 212 },
+    //     { time: "10:01", responseTime: 221 },
+    //     { time: "10:01", responseTime: 22 },
+    //     { time: "10:01", responseTime: 300 },
+    //     { time: "10:02", responseTime: 50 },
+    //     { time: "10:03", responseTime: 33 },
+    //     { time: "10:04", responseTime: 74 },
+    // ];
 
-    // ✅ Sample RPS Data
     const rpsData = [
         { time: "10:00", rps: 5 },
-        { time: "10:01", rps: 12 },
-        { time: "10:02", rps: 8 },
-        { time: "10:03", rps: 15 },
-        { time: "10:04", rps: 10 },
+        { time: "10:01", rps: 9 },
+        { time: "10:02", rps: 14 },
+        { time: "10:03", rps: 7 },
+        { time: "10:04", rps: 11 },
+        { time: "10:05", rps: 18 },
+        { time: "10:06", rps: 6 },
+        { time: "10:07", rps: 10 },
+        { time: "10:08", rps: 15 },
+        { time: "10:09", rps: 20 },
+        { time: "10:10", rps: 12 },
+        { time: "10:11", rps: 8 },
+        { time: "10:12", rps: 13 },
     ];
+    // ];
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
@@ -40,13 +74,16 @@ function ResponseTimeData() {
                 <ResponsiveContainer width="100%" height={250}>
                     <LineChart data={responseTimeData}>
                         <CartesianGrid strokeDasharray="3 3" />
+
                         <XAxis dataKey="time" />
                         <YAxis />
                         <Tooltip />
                         <Line type="monotone" dataKey="responseTime" stroke="#3b82f6" strokeWidth={2} />
+                        {/* <Line type="monotone" dataKey="responseTime" stroke="#3b82f6" strokeWidth={2} /> */}
+                        {/* <Bar dataKey="responseTime" barSize={20} fill="red"/> */}
                     </LineChart>
                 </ResponsiveContainer>
-                  <button
+                <button
                     onClick={() => Download(responseTimeData, "rps-data")}
                     className="bg-green-600 text-white px-4 py-2 rounded"
                 >
