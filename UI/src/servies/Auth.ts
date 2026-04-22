@@ -24,7 +24,8 @@ export const AuthLoginUser = async (userinfo: userlogin) => {
     }
     );
     return response;
-  } catch (error: any) {
+  } catch (error:any) {
+    console.log(error,'error APi')
     throw error
 
   }
