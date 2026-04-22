@@ -24,7 +24,7 @@ const LoginForm = () => {
 
         try {
             const response = await AuthLoginUser(userinfo)
-            console.log('login response', response);
+            console.log('login response', response.data.message);
             if (response.data.message == 'ok') {
                 localStorage.setItem("token", response.data.token)
                 localStorage.setItem("userInfo", JSON.stringify(response.data.user))
@@ -34,10 +34,12 @@ const LoginForm = () => {
                 }, 2000);
             }
 
-        } catch (error: any) {
-            console.log(error);
-
-            toast.error(error)
+        } catch (err: any) {
+            const errorMessage =
+                err?.response?.data?.message ||
+                err?.message ||
+                "Error occurred";
+            toast.error(errorMessage)
         }
 
     };
