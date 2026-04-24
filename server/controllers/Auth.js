@@ -32,10 +32,8 @@ const AuthNewUser = async (req, res) => {
 }
 const LoginUser = async (req, res) => {
     try {
-
-
         const { userEmail, userPassword, role } = req.query;
-        console.log({ userEmail, userPassword, role });
+        console.log({ userEmail, userPassword, role },'userdata');
         if (!userEmail || !userPassword || !role) { return res.status(404).json({ message: "Inputs are missing." }) }
 
         const getuser = await user.findOne({ userEmail: userEmail })

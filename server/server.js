@@ -26,7 +26,8 @@ connectDB()
 // =====================
 // Middlewares
 // =====================
-const apiurl = process.env.NODE_ENV == 'Development' ? ["http://localhost:5174", "http://localhost:5173"] : process.env.LiveUi_Api
+const apiurl = process.env.NODE_ENV == 'development' ? ["http://localhost:5174", "http://localhost:5173"] : process.env.LiveUi_Api
+console.log(process.env.NODE_ENV,'apiurl');
 console.log(apiurl,'apiurl');
 
 app.use(cors({
@@ -35,11 +36,7 @@ app.use(cors({
 }));
 
 // console.log({process.env.NODE_ENV,process.env.JWT_SECRET_KEY});
-// const data=
-console.log(process.env.NODE_ENV, 'NODE_ENV');
-console.log(process.env.Resend_email, 'Resend_email');
-console.log(process.env.CLOUDINARY_URL, 'CLOUDINARY_URL');
-console.log(process.env.JWT_SECRET_KEY, 'JWT_SECRET_KEY');
+
 
 app.use(express.json());
 // =====================
@@ -60,7 +57,7 @@ app.get("/", (req, res) => {
 // Server start
 // =====================
 const PORT = process.env.PORT || 8000;
-
+console.log(PORT,'PORT')
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
